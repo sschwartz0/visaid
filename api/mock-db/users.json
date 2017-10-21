@@ -1,7 +1,32 @@
 [
   {
     "id": 1,
-    "user": "barack_obama",
+    "user": "mike_beeronsky",
+    "address1": "555 Rodeo Dr.",
+    "address2": "",
+    "phone": "+15559095555",
+    "credit_rating": "poor"
+  },
+  {
+    "id": 2,
+    "user": "jon_kim",
+    "address1": "555 Rodeo Dr.",
+    "address2": "",
+    "phone": "+15559095555",
+    "credit_rating": "poor"
+  },
+  {
+    "id": 3,
+    "user": "scott_shorts",
+    "address1": "555 Rodeo Dr.",
+    "address2": "",
+    "phone": "+15559095555",
+    "credit_rating": "poor"
+  },
+  {
+    "id": 4,e .
+    
+    "user": "jimmy_huynh",
     "address1": "555 Rodeo Dr.",
     "address2": "",
     "phone": "+15559095555",
