@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack-dev-server --open",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:api-server": "NODE_PATH=. node ./bin/www"
+    "start:api-server": "NODE_PATH=. node ./bin/www",
+    "start:api-scott": "node ./bin/www"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,7 @@
   "homepage": "https://github.com/MJ-JS/visaid#readme",
   "dependencies": {
     "lodash": "^4.17.4",
+    "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-hot-loader": "^3.0.0-beta.7",

@@ -1,7 +1,7 @@
-export const changeMessage = message => dispatch => {
-  console.log('action message', message)
+export const formChange = ({ name, value }) => dispatch => {
   dispatch({
-    type: 'CHANGE_MESSAGE',
-    message,
-  })
-}
+    type: 'FORM_CHANGE',
+    name,
+    value,
+  });
+};
