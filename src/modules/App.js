@@ -28,6 +28,6 @@ export default class Message extends PureComponent {
       message,
     } = this.props;
 
-    return <button onClick={this.onClick}> Test the action {message}!</button>;
+    return <button onClick={this.onClick}> the action {message}!</button>;
   }
 }
