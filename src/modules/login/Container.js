@@ -1,33 +1,48 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { changeMessage } from './actions';
+import InputText from '../../components/InputText';
+import { formChange } from './actions';
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = state => {
   return {
-    message: state.login.message
-  }
-}
+    message: state.login.message,
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
-    changeMessage: message => { dispatch(changeMessage(message)) }
-  }
-}
+    formChange: (change) => { dispatch(formChange(change)); },
+  };
+};
 
 @connect(mapStateToProps, mapDispatchToProps)
 export default class Login extends PureComponent {
-
-  onClick = () => {
-    console.log('onclick')
-    this.props.changeMessage('test')
+  onFormChange = field => {
+    this.props.formChange(field);
   }
 
-  render () {
-    const {
-      changeMessage,
-      message,
-    } = this.props;
-
-    return <button onClick={this.onClick}> the action {message}!</button>;
+  render() {
+    return (
+      <div>
+        <InputText
+          className="test"
+          disabled={false}
+          value={undefined}
+          placeholder="Username/Email"
+          name="username"
+          onChange={this.onFormChange}
+        />
+        <br />
+        <InputText
+          className="test"
+          disabled={false}
+          value={undefined}
+          placeholder="Password"
+          name="password"
+          onChange={this.onFormChange}
+        />
+      </div>
+    );
   }
 }

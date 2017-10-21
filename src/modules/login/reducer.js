@@ -1,23 +1,27 @@
 
 const initialState = {
-  message: 'yo'
-}
+  username: undefined,
+  password: undefined,
+  loggedIn: false,
+};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case 'FORM_CHANGE': {
+      const {
+        name,
+        value,
+      } = action;
 
-    case 'CHANGE_MESSAGE': {
-      console.log(action, 'action')
-      const { message } = action;
       return {
         ...state,
-        message,
-      }
+        [name]: value,
+      };
     }
 
     default:
-      return state
+      return state;
   }
-}
+};
 
 export default reducer;
