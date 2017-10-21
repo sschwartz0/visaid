@@ -4,6 +4,7 @@
   "description": "Adding a layer of digital security to the physical world",
   "main": "index.js",
   "scripts": {
+    "start": "webpack-dev-server --open",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
