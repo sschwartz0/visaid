@@ -16,6 +16,7 @@
     }
   },
   "rules": {
+    "no-shadow":"off",
     "react/prefer-stateless-function": "off",
     "arrow-body-style":"off",
     "linebreak-style": "off",

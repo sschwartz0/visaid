@@ -1,12 +1,20 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import InputText from '../../components/InputText';
+import SafetyCode from './SafetyCode/SafetyCode';
 import { formChange } from './actions';
 
 const mapStateToProps = state => {
+  const {
+    identification: {
+      code,
+      isRequesting,
+    },
+  } = state;
+
   return {
-    message: state.login.message,
+    code,
+    isRequesting,
   };
 };
 
@@ -17,9 +25,11 @@ const mapDispatchToProps = dispatch => {
 };
 
 @connect(mapStateToProps, mapDispatchToProps)
-export default class Login extends PureComponent {
+export default class Identification extends PureComponent {
   static propTypes = {
+    code: PropTypes.string,
     formChange: PropTypes.func,
+    isRequesting: PropTypes.bool,
   };
 
   onFormChange = field => {
@@ -27,24 +37,18 @@ export default class Login extends PureComponent {
   }
 
   render() {
+    const {
+      code,
+      formChange,
+      isRequesting,
+    } = this.props;
+
     return (
       <div>
-        <InputText
-          className="test"
-          disabled={false}
-          value={undefined}
-          placeholder="Username/Email"
-          name="username"
-          onChange={this.onFormChange}
-        />
-        <br />
-        <InputText
-          className="test"
-          disabled={false}
-          value={undefined}
-          placeholder="Password"
-          name="password"
-          onChange={this.onFormChange}
+        <SafetyCode
+          code={code}
+          formChange={formChange}
+          isRequesting={isRequesting}
         />
       </div>
     );
