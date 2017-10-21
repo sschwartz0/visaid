@@ -1,0 +1,101 @@
+html {
+  background-color: #1a1e5a;
+  font-size: 100px;
+  text-align: center;
+  font-family: 'Patua One', cursive;
+  color: white;
+  /* display: flex;
+  justify-content: center; */
+}
+
+header {
+  margin-top: 50px;
+  margin-bottom: 70px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.loginInput {
+  text-align: center;
+  font-size: 80px;
+  color: #1a1e5a;
+}
+
+.input {
+  border: solid 1px black;
+  width: 100%;
+  height: 100px;
+}
+
+p {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+}
+
+.loginButton {
+  border: 1px solid black;
+  background: white;
+  width: 100%;
+  height: 100px;
+  color: #1a1e5a;
+  margin-top: 500px;
+  font-size: 80px;
+  /* border: 1px solid black */
+}
+
+.codeInput {
+  width: 100%;
+  background-color: #1a1e5a;
+  border: none;
+  border-bottom: 1px solid white;
+  color: white;
+  height: 100px;
+  font-size: 80px;
+  text-align: center;
+}
+
+.codeInput:focus {
+  outline: none;
+}
+
+.title {
+  /* align-items:left; */
+}
+
+.selectionButtonContainer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
+
+.checkbox {
+  height: 100px;
+  width: 100px;
+  background-color: #1a1e5a;
+}
+
+.selectionButton {
+  display: flex;
+  justify-content: space-between;
+  align-items:center;
+  padding-right: 40px;
+  /* justify-content: space-between; */
+  /* text-align: left; */
+  padding-left: 40px;
+  border: 1px solid black;
+  background: white;
+  /* width: 100%; */
+  height: 100px;
+  color: #1a1e5a;
+  font-size: 80px;
+  /* border: 1px solid black */
+}
+
+.checkbox {
+  align-items:right;
+  height: 100px;
+  width: 100px;
+}
