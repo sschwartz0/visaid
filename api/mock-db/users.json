@@ -1,0 +1,10 @@
+[
+  {
+    "id": 1,
+    "user": "barack_obama",
+    "address1": "555 Rodeo Dr.",
+    "address2": "",
+    "phone": "+15559095555",
+    "credit_rating": "poor"
+  }
+]
