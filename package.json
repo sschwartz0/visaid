@@ -21,9 +21,9 @@
     "lodash": "^4.17.4",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-hot-loader": "^3.1.1",
+    "react-hot-loader": "^3.0.0-beta.7",
     "react-redux": "^5.0.6",
-    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0"
   },
@@ -52,7 +52,7 @@
     "path": "^0.12.7",
     "redux-devtools": "^3.4.0",
     "source-map-loader": "^0.2.2",
-    "webpack": "^3.8.1",
+    "webpack": "3.6.0",
     "webpack-dev-server": "^2.9.3"
   }
 }
