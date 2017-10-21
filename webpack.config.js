@@ -15,9 +15,6 @@ module.exports = {
 	plugins: [
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.NamedModulesPlugin(),
-		new webpack.optimize.CommonsChunkPlugin({
-			name: 'common',
-		}),
 		new HtmlWebpackPlugin({
 			template: './index.html',
 			filename: 'index.html',
@@ -31,15 +28,6 @@ module.exports = {
 	},
 	module: {
 		rules: [
-			{
-				test: /\.(html)$/,
-				use: {
-					loader: 'html-loader',
-					options: {
-						attrs: [':data-src'],
-					},
-				},
-			},
 			{
 				test: /\.js$/,
 				loader: 'source-map-loader',

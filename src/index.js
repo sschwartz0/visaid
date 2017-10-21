@@ -1,18 +1,15 @@
 import 'babel-polyfill';
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
+import { createStore } from 'redux';
 import { AppContainer } from 'react-hot-loader';
-// import reducer from './reducers'
+import reducer from './reducers'
 import App from './modules/App'
 
 let store = createStore(
-  reducer, compose(
-    applyMiddleware(thunk),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-  )
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
 ReactDOM.render(
@@ -28,7 +25,7 @@ if (module.hot) {
   module.hot.accept('./modules/App', () => {
     const NextApp = require('./modules/App').default;
     ReactDOM.render(
-      <AppContainer> 
+      <AppContainer>
         <Provider store={store}>
           <NextApp/>
         </Provider>
