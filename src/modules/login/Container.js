@@ -2,7 +2,8 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import InputText from '../../components/InputText';
-import { formChange } from './actions';
+import { formChange, onSubmit } from './actions';
+import Button from '../../components/Button';
 
 const mapStateToProps = state => {
   return {
@@ -13,6 +14,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     formChange: (change) => { dispatch(formChange(change)); },
+    onSubmit: () => { dispatch(onSubmit()); },
   };
 };
 
@@ -24,6 +26,10 @@ export default class Login extends PureComponent {
 
   onFormChange = field => {
     this.props.formChange(field);
+  }
+
+  onSubmit = submit => {
+    this.props.onSubmit(submit);
   }
 
   render() {
@@ -45,6 +51,11 @@ export default class Login extends PureComponent {
           placeholder="Password"
           name="password"
           onChange={this.onFormChange}
+        />
+        <br />
+        <Button
+          text="button"
+          onClick={this.onSubmit}
         />
       </div>
     );
