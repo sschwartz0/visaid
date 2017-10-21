@@ -1,3 +1,4 @@
+
 const initialState = {
   message: 'yo'
 }
@@ -5,8 +6,8 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
 
-    case 'TEST': {
-      console.log(action)
+    case 'CHANGE_MESSAGE': {
+      console.log(action, 'action')
       const { message } = action;
       return {
         ...state,
