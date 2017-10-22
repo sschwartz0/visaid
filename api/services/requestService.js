@@ -25,7 +25,7 @@ const createSession = function (req, res) {
           const checkStatusInterval = setInterval(() => {
             checkStatus(safetyCode)
               .then(status => {
-                if (status === 'INPROGRESS') {
+                if (status === 'COMPLETE') {
                   clearInterval(checkStatusInterval);
                   return console.log('YUP');
                 }
