@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import SafetyCode from './SafetyCode/SafetyCode';
 import Permissions from './Permissions/Permissions';
-import { changeStatus, formChange, requestPermission } from './actions';
+import { 
+  changeStatus, 
+  formChange, 
+  requestPermission, 
+  sendCode 
+} from './actions';
 
 const mapStateToProps = state => {
   const {
@@ -28,6 +33,7 @@ const mapDispatchToProps = dispatch => {
     changeStatus: status => { dispatch(changeStatus(status)); },
     formChange: change => { dispatch(formChange(change)); },
     requestPermission: permission => { dispatch(requestPermission(permission)); },
+    sendCode: code => { dispatch(sendCode(code)); },
   };
 };
 
@@ -54,8 +60,10 @@ export default class Identification extends PureComponent {
     
     await formChange(field);
 
-    if (code.length === 5 && status !== 'SENDING')
+    if (code.length === 5 && status !== 'SENDING') {
       changeStatus('SENDING');
+      sendCode(code);
+    }
   
     if (code.length <= 6 && status === 'SENDING')
       changeStatus(undefined);

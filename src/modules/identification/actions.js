@@ -25,7 +25,7 @@ export const requestPermission = ({ permissionKey, requested }) => async (dispat
   const requestedPermissions = Object.values(permissions)
     .filter(permission => permission.requested)
     .map(({ name }) => name);
-    
+
   axios.post('http://localhost:3000/v1/requests', {
     cardId: 'asdzx23',
     permissions: requestedPermissions,
@@ -60,3 +60,17 @@ export const changeStatus = status => dispatch => {
     status,
   });
 };
+
+export const sendCode = code => dispatch => {
+  axios.get('http://localhost:3000/v1/requests', {
+    safetyCode: code,
+  })
+    .then(response => {
+      console.log(response)
+    })
+    .catch(error => {
+      console.log(error)
+    })
+
+
+}
