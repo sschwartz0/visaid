@@ -123,10 +123,7 @@ export const longPoll = code => async (dispatch, getState) => {
           });
         }
         if (response.data.status === "COMPLETE" && status !== "REQUESTOR_WAITING") {
-          dispatch({
-            type: 'CHANGE_STATUS',
-            status: 'REQUESTOR_WAITING'
-          })
+          
           
           window.clearInterval(serverStatus);
           axios.get(`http://localhost:3000/v1/requests/${code}`)
@@ -140,6 +137,11 @@ export const longPoll = code => async (dispatch, getState) => {
                 permissionKey,
                 requested,
               });
+              
+              dispatch({
+                type: 'CHANGE_STATUS',
+                status: 'RECEIVED'
+              })
             });
           })
           .catch(error => {
