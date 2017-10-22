@@ -6,7 +6,7 @@ const fileName = "../mock-db/requests.json";
 const createSession = function (req, res) {
   fs.readFile(join(__dirname, fileName), 'utf-8', (err, requestsDB) => {
     requestsDB = JSON.parse(requestsDB);
-    if (err) res.send(err);
+    if (err) res.status(500).send(err);
     if (req.body.safetyCode === undefined) {
       let safetyCode = generateSafetyCode(requestsDB);
       requestsDB[safetyCode] = {
@@ -20,7 +20,7 @@ const createSession = function (req, res) {
           }, {})
       };
       fs.writeFile(join(__dirname,fileName), JSON.stringify(requestsDB, null, 2), (err) => {
-      if (err) res.send(err);
+      if (err) res.status(500).send(err);
       else {
         res.json({
           safetyCode: safetyCode
@@ -39,7 +39,7 @@ const createSession = function (req, res) {
           return acc;
         }, {});
         fs.writeFile(join(__dirname,fileName), JSON.stringify(requestsDB, null, 2), (err) => {
-          if (err) res.send(err);
+          if (err) res.status(500).send(err);
           else {
             res.json({
               safetyCode: safetyCode
@@ -47,7 +47,7 @@ const createSession = function (req, res) {
           }
           });
       } else {
-        res.send('Card ID mismatch error');
+        res.status(500).send('Card ID mismatch error');
       }
   }
   });
@@ -55,15 +55,15 @@ const createSession = function (req, res) {
 
 const getSession = function (req, res) {
   fs.readFile(join(__dirname, fileName), 'utf-8', (err, requestsDB) => {
-    if (err) res.send(err);
+    if (err) res.status(500).send(err);
     requestsDB = JSON.parse(requestsDB);
     let session = requestsDB[req.params.safetyCode];
     if (!session) {
-      res.send('no active sessions found with that code');
+      res.status(500).send('no active sessions found with that code');
     } else {
       session.status = "PENDING";
       fs.writeFile(join(__dirname,fileName), JSON.stringify(requestsDB, null, 2), (err) => {
-        if (err) res.send(err);
+        if (err) res.status(500).send(err);
         else {
           res.json({
             permissions: session.permissions
@@ -77,7 +77,7 @@ const getSession = function (req, res) {
 const deleteSession = function (db, safetyCode, res) {
   delete db[safetyCode];
   fs.writeFile(join(__dirname,fileName), JSON.stringify(db, null, 2), (err) => {
-    if (err) res.send(err);
+    if (err) res.status(500).send(err);
     else {
       res.send('session deleted');
     }
