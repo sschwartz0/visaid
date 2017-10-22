@@ -128,15 +128,13 @@ export const longPoll = code => async (dispatch, getState) => {
           window.clearInterval(serverStatus);
           axios.get(`http://localhost:3000/v1/requests/${code}`)
             .then(response => {
-              const permissions = response.data.permissions;
-              console.log(response.data)
-              // Object.entries(permissions).forEach(([permissionKey, requested]) => {
-              //   console.log(permissionKey, requested)
-              //   dispatch({
-              //     type: 'REQUEST_PERMISSION',
-              //     permissionKey,
-              //     requested,
-              //   });
+              const sentPermissions = response.data;
+              console.log(sentPermissions)
+
+                dispatch({
+                  type: 'SEND_ALL_PERMISSIONS',
+                  sentPermissions,
+                });
 
               dispatch({
                 type: 'CHANGE_STATUS',

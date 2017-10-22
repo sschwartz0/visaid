@@ -45,8 +45,26 @@ const initialState = {
       requested: false,
       value: undefined,
     },
+    creditRating: {
+      name: 'Credit Rating',
+      description: 'We will give you a rating of the users credit score',
+      requested: false,
+      value: undefined,
+    },
+    visaStanding: {
+      name: 'Visa Standing',
+      description: 'We will verify the users Visa standing',
+      requested: false,
+      value: undefined,
+    },
+    income: {
+      name: 'Income',
+      description: 'We will show you the users income range',
+      requested: false,
+      value: undefined,
+    },
   },
-  sendingPermissions: {},
+  sentPermissions: {},
 };
 
 const reducer = (state = initialState, action) => {
@@ -119,10 +137,12 @@ const reducer = (state = initialState, action) => {
     }
     
     case 'SEND_ALL_PERMISSIONS': {
+      const { sentPermissions } = action;
+      
       return {
         ...state,
-        // TAKE VALUES FROM SENDINGPERMISSIONS AND PUT THEM INTO THE PERMISSIONS ARRAY
-      }
+        sentPermissions,
+      };
     }
     
     case 'CHANGE_REQUEST_STATUS': {

@@ -18,6 +18,7 @@ const mapStateToProps = state => {
       code,
       isRequesting,
       permissions,
+      sentPermissions,
       requestStatus,
       status,
     },
@@ -27,6 +28,7 @@ const mapStateToProps = state => {
     code,
     isRequesting,
     permissions,
+    sentPermissions,
     requestStatus,
     status,
   };
@@ -52,6 +54,7 @@ export default class Identification extends PureComponent {
     isRequesting: PropTypes.bool,
     longPoll: PropTypes.func,
     permissions: PropTypes.object,
+    sentPermissions: PropTypes.object,
     requestPermission: PropTypes.func,
     isSendingResponse: PropTypes.bool,
     requestStatus: PropTypes.string,
@@ -115,6 +118,7 @@ export default class Identification extends PureComponent {
     const {
       code,
       permissions,
+      sentPermissions,
       status,
     } = this.props;
 
@@ -132,6 +136,7 @@ export default class Identification extends PureComponent {
           code={code}
           enabled={status !== 'SENDER_WAITING'}
           permissions={permissions}
+          sentPermissions={sentPermissions}
           onRequestPermission={this.onRequestPermission}
           onSendVerification={this.onSendVerification}
           status={status}

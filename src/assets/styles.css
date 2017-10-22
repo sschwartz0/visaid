@@ -126,6 +126,45 @@ html, body {
   background-color: #f1f1f1
 }
 
+.received-permission-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #FAFAFA;
+  border-radius: 2px;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+  color: #757575 !important;
+  margin-bottom: 5px;
+}
+
+.received-permission-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: left;
+  width: 95%;
+  color: rgba(0,0,0,.54);
+  padding: 10px;
+  font-weight: 700;
+}
+
+.received-permission-container-declined {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(237, 61, 61, .5);
+  border-radius: 2px;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+  color: #757575 !important;
+  margin-bottom: 5px;
+}
+
+.received-value {
+  margin-top: 5px;
+}
+
+.declined-to-send {
+  background-color: rgba(237, 61, 61, .5)
+}
+
 input {
   width: 100%;
 }
