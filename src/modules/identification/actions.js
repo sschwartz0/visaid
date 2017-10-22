@@ -102,3 +102,27 @@ export const sendVerification = () => (dispatch, getState) => {
       console.log(error);
     });
 };
+
+export const longPoll = () => (dispatch, getState) => {
+  const identification = getState().identification;
+  const {
+    code,
+    requestStatus,
+  } = identification;
+  
+  window.setInterval(() => {
+    axios.get(`http://localhost:3000/v1/requests/status/${code}`)
+      .then(response => {
+        console.log(response)
+        if (response.data !== requestStatus) {
+          dispatch({
+            type: 'CHANGE_REQUEST_STATUS',
+            requestStatus: response.data,
+          });
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, 100);
+}

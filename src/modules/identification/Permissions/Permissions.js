@@ -37,7 +37,7 @@ export default class Permissions extends PureComponent {
                 <Permission
                   key={key}
                   permissionKey={key}
-                  enabled={enabled}
+                  enabled
                   name={name}
                   description={description}
                   requested={requested}

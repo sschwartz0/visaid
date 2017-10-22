@@ -51,7 +51,7 @@ export default class Permission extends PureComponent {
     return (
       <div className="permission-container">
         <div className="permission-box">
-          <div onClick={this.onShowDescription}>
+          <div onClick={this.onShowDescription} style={{ flexGrow: 2 }}>
             <label 
               htmlFor={permissionKey}
             >
@@ -69,7 +69,7 @@ export default class Permission extends PureComponent {
             </div>
           </div>
         {showDescription &&
-          <div className="permission-description">
+          <div onClick={this.onShowDescription} className="permission-description">
             {description}
           </div>
         }

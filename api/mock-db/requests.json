@@ -1,1 +1,19 @@
-{}
+{
+  "394456": {
+    "cardId": "asdzx23",
+    "expirationTime": 1508682377526,
+    "status": "CREATED",
+    "permissions": {
+      "address": true
+    }
+  },
+  "816050": {
+    "cardId": "asdzx23",
+    "expirationTime": 1508681465637,
+    "status": "INPROGRESS",
+    "permissions": {
+      "address": true,
+      "picture": true
+    }
+  }
+}
