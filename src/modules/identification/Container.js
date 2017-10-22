@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import SafetyCode from './SafetyCode/SafetyCode';
-import { formChange } from './actions';
+import { formChange, generateCode } from './actions';
 
 const mapStateToProps = state => {
   const {
@@ -21,6 +21,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     formChange: (change) => { dispatch(formChange(change)); },
+    generateCode: () => { dispatch(generateCode()); },
   };
 };
 
@@ -28,6 +29,7 @@ const mapDispatchToProps = dispatch => {
 export default class Identification extends PureComponent {
   static propTypes = {
     code: PropTypes.string,
+    generateCode: PropTypes.func,
     formChange: PropTypes.func,
     isRequesting: PropTypes.bool,
   };
@@ -35,11 +37,14 @@ export default class Identification extends PureComponent {
   onFormChange = field => {
     this.props.formChange(field);
   }
+  
+  generateCode = () => {
+    this.props.generateCode();
+  }
 
   render() {
     const {
       code,
-      formChange,
       isRequesting,
     } = this.props;
 
@@ -50,6 +55,7 @@ export default class Identification extends PureComponent {
           formChange={formChange}
           isRequesting={isRequesting}
         />
+        <button onClick={this.generateCode}> Generate code </button>
       </div>
     );
   }

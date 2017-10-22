@@ -18,6 +18,15 @@ const reducer = (state = initialState, action) => {
       };
     }
 
+    case 'GENERATE_CODE': {
+      const { code } = action;
+
+      return {
+        ...state,
+        code,
+      };
+    }
+
     default:
       return state;
   }
