@@ -45,6 +45,24 @@ const initialState = {
       requested: false,
       value: undefined,
     },
+    creditRating: {
+      name: 'Credit Rating',
+      description: 'We will give you a rating of the users credit score',
+      requested: false,
+      value: undefined,
+    },
+    visaStanding: {
+      name: 'Visa Standing',
+      description: 'We will verify the users Visa standing',
+      requested: false,
+      value: undefined,
+    },
+    income: {
+      name: 'Income',
+      description: 'We will show you the users income range',
+      requested: false,
+      value: undefined,
+    },
   },
   sentPermissions: {},
 };
