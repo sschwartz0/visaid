@@ -20,6 +20,9 @@
   },
   "homepage": "https://github.com/MJ-JS/visaid#readme",
   "dependencies": {
+    "axios": "^0.17.0",
+    "es6-promise": "^4.1.1",
+    "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.4",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",

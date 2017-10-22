@@ -1,10 +1,10 @@
 const fs = require('fs');
-const {join}= require('path');
+const { join } = require('path');
 const fileName = "../mock-db/requests.json";
-const requestsDB = require(join(__dirname,fileName));
+const requestsDB = require(join(__dirname, fileName));
 
 
-const createSession = function(req, res) {
+const createSession = function (req, res) {
     if (!requestsDB[req.body.internalAccountID]) {
         requestsDB[req.body.internalAccountID] = {
             safetyCode: req.body.safetyCode,
@@ -48,4 +48,4 @@ DB Schema
   SAMPLE COMMAND
   curl -H "Content-Type: application/json" -X POST -d '{"safetyCode":"123456","internalAccountID":"efkhwr3tn43tkfewkjfnskjfn36", "permissions": ["Name", "Address", "Credit Score"]}' localhost:3000/v1/requests
 */
-module.exports = {createSession : createSession};
+module.exports = { createSession: createSession };
