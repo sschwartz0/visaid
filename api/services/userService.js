@@ -10,7 +10,7 @@ exports.getUser = (req, res, next) => {
     const users = JSON.parse(data);
     const result = pipe(
       getUserById,
-      filterByPermissions(Object.keys(req.query)),
+      filterByPermissions(Object.keys(req.query))
     )(id, users);
     return res.json(result);
   });
