@@ -1,13 +1,1 @@
-{
-  "415954": {
-    "cardId": "asdzx23",
-    "expirationTime": 1508680960884,
-    "status": "COMPLETE",
-    "permissions": {
-      "address": true
-    },
-    "userData": {
-      "address": " 123 N Street  SomeTown 90210 CA"
-    }
-  }
-}
+{}

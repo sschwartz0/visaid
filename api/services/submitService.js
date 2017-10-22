@@ -14,7 +14,7 @@ const submitResponse = function (req, res) {
     });
     session.status = 'INPROGRESS';
     fs.writeFile(join(__dirname, fileName), JSON.stringify(requestsDB, null, 2), (err) => {
-      if (err) res.status(500).send(err);
+      if (err) return res.status(500).send(err);
       getUserInfo()
         .then(user => {
             user = JSON.parse(user);

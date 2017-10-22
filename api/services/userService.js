@@ -8,8 +8,8 @@ const users = '../mock-db/users.json';
 
 exports.getUserDetail = (req, res, next) => {
   getUserInfo()
-    .then(data => {
-      res.json(JSON.parse(data));
+    .then(user => {
+      res.json(JSON.parse(user));
     })
     .catch(next);
 };
