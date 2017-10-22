@@ -12,8 +12,16 @@ class Button extends React.PureComponent {
       onClick,
       text,
     } = this.props;
+    const style = {
+      'marginLeft': 'auto',
+      'marginRight': 'auto',
+    };
     return (
-      <button onClick={onClick}>
+      <button 
+        onClick={onClick}
+        className="bank-item mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
+        style={style}
+      >
         {text}
       </button>
     );

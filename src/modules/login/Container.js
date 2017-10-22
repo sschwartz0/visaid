@@ -74,7 +74,7 @@ export default class Login extends PureComponent {
       <img src={require('../../assets/logo.png')} width="250px" height="200px"/>
         {
           bank !== undefined ?
-            <div>
+            <div className="centerMargin">
               <InputText
                 className="test"
                 disabled={false}

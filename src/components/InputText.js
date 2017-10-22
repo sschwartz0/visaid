@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default class InputText extends PureComponent {
   static propTypes = {
-    className: PropTypes.string.isRequired,
+    // className: PropTypes.string.isRequired,
     value: PropTypes.any,
     disabled: PropTypes.bool,
     name: PropTypes.string.isRequired,
@@ -27,7 +27,7 @@ export default class InputText extends PureComponent {
 
   render() {
     const {
-      className,
+      // className,
       value,
       disabled,
       name,
@@ -35,15 +35,18 @@ export default class InputText extends PureComponent {
     } = this.props;
 
     return (
-      <div>
+      <div
+        className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded"
+        data-upgraded=",MaterialTextfield"
+      >
         <input
           type="text"
-          className={className}
+          className="mdl-textfield__input inputText inputTextStyle"
           disabled={disabled}
           name={name}
           onChange={this.onChange}
-          placeholder={placeholder}
           value={value}
+          placeholder={placeholder}
         />
       </div>
     );
