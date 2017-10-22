@@ -1,6 +1,7 @@
 const initialState = {
   code: undefined,
   status: 'IDLE',
+  requestStatus: undefined,
   permissions: {
     address: {
       name: 'Address',
@@ -68,7 +69,7 @@ const reducer = (state = initialState, action) => {
         permissionKey,
         requested,
       } = action;
-console.log('reducer', action)
+
       return {
         ...state,
         permissions: {
@@ -103,6 +104,15 @@ console.log('reducer', action)
       return {
         ...state,
         // TAKE VALUES FROM SENDINGPERMISSIONS AND PUT THEM INTO THE PERMISSIONS ARRAY
+      }
+    }
+    
+    case 'CHANGE_REQUEST_STATUS': {
+      const { requestStatus } = action;
+      
+      return {
+        ...state,
+        requestStatus,
       }
     }
 

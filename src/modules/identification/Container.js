@@ -5,7 +5,8 @@ import SafetyCode from './SafetyCode/SafetyCode';
 import Permissions from './Permissions/Permissions';
 import { 
   changeStatus, 
-  formChange, 
+  formChange,
+  longPoll,
   requestPermission, 
   sendCode,
   sendVerification,
@@ -17,6 +18,7 @@ const mapStateToProps = state => {
       code,
       isRequesting,
       permissions,
+      requestStatus,
       status,
     },
   } = state;
@@ -25,6 +27,7 @@ const mapStateToProps = state => {
     code,
     isRequesting,
     permissions,
+    requestStatus,
     status,
   };
 };
@@ -33,6 +36,7 @@ const mapDispatchToProps = dispatch => {
   return {
     changeStatus: status => { dispatch(changeStatus(status)); },
     formChange: change => { dispatch(formChange(change)); },
+    longPoll: code => { dispatch(longPoll(code)); },
     requestPermission: permission => { dispatch(requestPermission(permission)); },
     sendCode: code => { dispatch(sendCode(code)); },
     sendVerification: () => { dispatch(sendVerification()); },
@@ -46,13 +50,28 @@ export default class Identification extends PureComponent {
     changeStatus: PropTypes.func,
     formChange: PropTypes.func,
     isRequesting: PropTypes.bool,
+    longPoll: PropTypes.func,
     permissions: PropTypes.object,
     requestPermission: PropTypes.func,
     isSendingResponse: PropTypes.bool,
+    requestStatus: PropTypes.string,
     status: PropTypes.string,
     sendCode: PropTypes.func,
     sendVerification: PropTypes.func,
   };
+  
+  componentWillReceiveProps = (nextProps) => {
+    const {
+      status,
+      requestStatus,
+      changeStatus,
+    } = this.props;
+    
+    if (this.props.code !== nextProps.code && status === "REQUESTING") {
+      console.log(this.props.code, nextProps.code)
+      this.props.longPoll(nextProps.code)
+    }
+  }
 
   onFormChange = async field => {
     const {
@@ -89,6 +108,7 @@ export default class Identification extends PureComponent {
   
   onSendVerification = () => {
     this.props.sendVerification();
+    this.props.changeStatus('SENT')
   };
 
   render() {
@@ -99,7 +119,10 @@ export default class Identification extends PureComponent {
     } = this.props;
 
     return (
-      <div>
+      <div className="identification-container">
+        <div style={{ textAlign: "center" }}> 
+          <img src={require('../../assets/logo1.png')} width="400px" height="100px" style={{ paddingBottom: "50px", marginLeft: "-40px" }} />
+        </div>
         <SafetyCode
           code={code}
           formChange={this.onFormChange}
@@ -107,6 +130,7 @@ export default class Identification extends PureComponent {
         />
         <Permissions
           code={code}
+          enabled={status !== 'SENDER_WAITING'}
           permissions={permissions}
           onRequestPermission={this.onRequestPermission}
           onSendVerification={this.onSendVerification}

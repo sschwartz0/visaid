@@ -13,9 +13,11 @@ class Button extends React.PureComponent {
       text,
     } = this.props;
     const style = {
-      'marginLeft': 'auto',
-      'marginRight': 'auto',
-      'border-radius': '2px !important',
+      marginLeft: 'auto',
+      marginRight: 'auto',
+      marginTop: '30px',
+      borderRadius: '2px !important',
+      color: '#FFF',
     };
     return (
       <button 

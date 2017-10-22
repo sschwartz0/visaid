@@ -95,14 +95,7 @@ export default class Login extends PureComponent {
               />
               <br />
               <Button
-                text={
-                  <span 
-                    style={{ 
-                      color: 'white', 
-                    }}
-                  >
-                    Sign In
-                  </span>}
+                text="Sign In"
                 onClick={this.onSubmit}
               />
             </div>
@@ -116,7 +109,7 @@ export default class Login extends PureComponent {
               chooseBank={this.chooseBank}
             />
         }
-        {!displayProviders && 
+        {displayProviders || !bank && 
           <div className="value-proposition">
             <h5>Feel secure no matter what you do, who you meet or where you are</h5>
           </div>
