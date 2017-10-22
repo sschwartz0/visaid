@@ -7,7 +7,8 @@ import {
   changeStatus, 
   formChange, 
   requestPermission, 
-  sendCode 
+  sendCode,
+  sendVerification,
 } from './actions';
 
 const mapStateToProps = state => {
@@ -34,6 +35,7 @@ const mapDispatchToProps = dispatch => {
     formChange: change => { dispatch(formChange(change)); },
     requestPermission: permission => { dispatch(requestPermission(permission)); },
     sendCode: code => { dispatch(sendCode(code)); },
+    sendVerification: () => { dispatch(sendVerification()); },
   };
 };
 
@@ -49,6 +51,7 @@ export default class Identification extends PureComponent {
     isSendingResponse: PropTypes.bool,
     status: PropTypes.string,
     sendCode: PropTypes.func,
+    sendVerification: PropTypes.func,
   };
 
   onFormChange = async field => {
@@ -68,9 +71,9 @@ export default class Identification extends PureComponent {
   
     if (field.value.length !== 6 && status === 'SENDING')
       changeStatus(undefined);
-    };
+  };
   
-  onRequestPermission = async permission => {
+  onRequestPermission = permission => {
     const {
       changeStatus,
       requestPermission,
@@ -83,13 +86,15 @@ export default class Identification extends PureComponent {
 
     requestPermission(permission);
   };
+  
+  onSendVerification = () => {
+    this.props.sendVerification();
+  };
 
   render() {
     const {
       code,
       permissions,
-      isRequesting,
-      isSendingResponse,
       status,
     } = this.props;
 
@@ -104,7 +109,7 @@ export default class Identification extends PureComponent {
           code={code}
           permissions={permissions}
           onRequestPermission={this.onRequestPermission}
-          isSendingResponse={isSendingResponse}
+          onSendVerification={this.onSendVerification}
           status={status}
         />
       </div>
