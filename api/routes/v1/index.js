@@ -6,14 +6,10 @@ const RequestService = require('./../../services/requestService');
 const router = express.Router();
 
 router.get('/users/:id', UserService.getUser);
-
-router.get('/requests', RequestService.getRequest);
-
-router.post('/requests', RequestService.createRequest);
-
-router.post('/users/card', UserService.getCardId);
+router.post('/users/card', UserService.getUserDetail);
 
 router.get('/requests/:safetyCode', RequestService.getSession);
+router.post('/requests', RequestService.createSession);
 
 router.post('/submit', SubmitService.submitResponse);
 
