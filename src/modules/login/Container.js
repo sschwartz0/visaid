@@ -71,7 +71,7 @@ export default class Login extends PureComponent {
 
     return (
       <div className="login-container">
-      <img src={require('../../assets/logo.png')} width="250px" height="200px"/>
+      <img src={require('../../assets/logo1.png')} width="400px" height="100px" style={{ paddingBottom: "50px", marginLeft: "-20px" }} />
         {
           bank !== undefined ?
             <div>
