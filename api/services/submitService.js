@@ -42,7 +42,7 @@ const formatData = function (responseOb, permission) {
     const ob = Object.assign({}, responseOb.resource.address);
     delete ob.addressLine3;
     delete ob.country;
-    return Object.keys(ob).reduce((acc, ele) => acc + ' ' + ob[ele], '');
+    return Object.keys(ob).reduce((acc, ele) => `${acc} ${ob[ele]}`, '');
   }
   return null;
 };
