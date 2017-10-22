@@ -1,8 +1,12 @@
 {
   "efkhwr3tn43tkfewkjfnskjfn36": {
     "safetyCode": "123456",
-    "expirationTime": 1508631287533,
+    "expirationTime": 1508632356609,
     "status": "CREATED",
-    "permissions": true
+    "permissions": {
+      "Name": true,
+      "Address": true,
+      "Credit Score": true
+    }
   }
 }
