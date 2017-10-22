@@ -12,6 +12,10 @@ export default class Permission extends PureComponent {
     permissionKey: PropTypes.string,
   };
   
+  state = {
+    showDescription: false,
+  }
+  
   onRequestPermission = () => {
     const {
       permissionKey,
@@ -22,7 +26,18 @@ export default class Permission extends PureComponent {
       requested: !requested,
       permissionKey,
     });
+    
+    this.setState({
+      showDescription: !requested,
+    })
   }
+  
+  onShowDescription = () => {
+    if (!this.props.requested)
+      this.setState({
+        showDescription: !this.state.showDescription,
+      });
+  };
 
   render() {
     const {
@@ -33,21 +48,32 @@ export default class Permission extends PureComponent {
       value,
       permissionKey,
     } = this.props;
+    
+    const {
+      showDescription,
+    } = this.state;
 
     return (
       <div>
-        <label 
-          htmlFor={permissionKey}
-        >
-          {name} - {description}
-        </label>
-        <input
-          type="checkbox"
-          name={permissionKey}
-          checked={requested}
-          disabled={!enabled}
-          onChange={this.onRequestPermission}
-        />
+        <div onClick={this.onShowDescription}>
+          <label 
+            htmlFor={permissionKey}
+          >
+            {name} - 
+          </label>
+          <input
+            type="checkbox"
+            name={permissionKey}
+            checked={requested}
+            disabled={!enabled}
+            onChange={this.onRequestPermission}
+          />
+        </div>
+        {showDescription &&
+          <div>
+            {description}
+          </div>
+        }
       </div>
 
     );
