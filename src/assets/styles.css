@@ -14,8 +14,6 @@ html, body {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  max-height: 100%;
-  overflow-y: scroll;
 }
 
 .login-container {
