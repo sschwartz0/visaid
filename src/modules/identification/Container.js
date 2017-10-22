@@ -125,7 +125,13 @@ export default class Identification extends PureComponent {
     return (
       <div className="identification-container">
         <div style={{ textAlign: "center" }}> 
-          <img src={require('../../assets/logo1.png')} width="400px" height="100px" style={{ paddingBottom: "50px", marginLeft: "-40px" }} />
+          <img src={require('../../assets/logo1.png')} width="400px" height="100px" style={{ paddingBottom: "0px", marginLeft: "-40px" }} />
+        </div>
+        <div>
+        {status === "IDLE" && <div> 
+          <h6>Want to verify someone? Check what you want to see and we'll generate a unique code to give the other person.`</h6>
+        </div>
+        }
         </div>
         <SafetyCode
           code={code}

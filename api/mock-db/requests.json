@@ -16,5 +16,20 @@
       "name": true,
       "dateOfBirth": true
     }
+  },
+  "906849": {
+    "cardId": "asdzx23",
+    "expirationTime": 1508694869257,
+    "status": "CREATED",
+    "permissions": {
+      "name": true,
+      "dateOfBirth": true,
+      "address": true,
+      "mobilePhoneNumber": true,
+      "ssn": true,
+      "creditRating": true,
+      "visaStanding": true,
+      "income": true
+    }
   }
 }

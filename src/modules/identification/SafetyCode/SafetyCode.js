@@ -27,7 +27,7 @@ export default class SafetyCode extends PureComponent {
           className="test"
           disabled={isDisabled}
           value={code || ''}
-          placeholder="Enter a code here or start requesting permissions"
+          placeholder="Enter your code here"
           name="code"
           onChange={this.onFormChange}
         />
