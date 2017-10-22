@@ -86,9 +86,13 @@ export const sendVerification = () => (dispatch, getState) => {
     code,
     permissions,
   } = identification;
-    
+  
+  const transformedPermissions = Object.keys(permissions).reduce((acc, permissionName) => {
+    return { ...acc, [permissionName]: permissions[permissionName].requested };
+  }, {});
+
   axios.post('http://localhost:3000/v1/submit', {
-    permissions,
+    permissions: transformedPermissions,
     safetyCode: code,
   })
     .then(response => {
@@ -97,4 +101,4 @@ export const sendVerification = () => (dispatch, getState) => {
     .catch(error => {
       console.log(error);
     });
-}
+};
