@@ -37,15 +37,31 @@ const submitResponse = function (req, res) {
 };
 
 const formatData = function (responseOb, permission) {
-  if (permission === 'Name') return responseOb.firstName + responseOb.lastName;
+  if (permission === 'name') return responseOb.firstName + responseOb.lastName;
   if (permission === 'address') {
     const ob = Object.assign({}, responseOb.resource.address);
     delete ob.addressLine3;
     delete ob.country;
     return Object.keys(ob).reduce((acc, ele) => `${acc} ${ob[ele]}`, '');
   }
+  if (permission === 'mobileNumber' || permission === 'homeNumber') {
+    return `1 (${permission.slice(0, 2)}) ${permission.slice(2, 5)}-${permission.slice(5, 9)}}`;
+  }
+  if (permission === 'ssn') {
+    return `${permission.slice(0, 3)}-${permission.slice(3, 5)}-${permission.slice(5, 9)}`;
+  }
+  if (permission === 'primary') {
+    return permission;
+  }
+  if (permission === 'primary') {
+    return permission;
+  }
+  if (permission === 'birthday') {
+    return permission;
+  }
   return null;
 };
+
 
 module.exports = { 
   submitResponse
