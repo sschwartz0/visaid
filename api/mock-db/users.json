@@ -2,33 +2,26 @@
   {
     "id": 1,
     "user": "mike_beeronsky",
-    "address1": "555 Rodeo Dr.",
-    "address2": "",
-    "phone": "+15559095555",
     "credit_rating": "poor"
   },
   {
     "id": 2,
     "user": "jon_kim",
-    "address1": "555 Rodeo Dr.",
-    "address2": "",
-    "phone": "+15559095555",
     "credit_rating": "poor"
   },
   {
     "id": 3,
     "user": "scott_shorts",
-    "address1": "555 Rodeo Dr.",
-    "address2": "",
-    "phone": "+15559095555",
     "credit_rating": "poor"
   },
   {
     "id": 4,
     "user": "jimmy_huynh",
-    "address1": "555 Rodeo Dr.",
-    "address2": "",
-    "phone": "+15559095555",
     "credit_rating": "poor"
+  },
+  {
+    "id": 5,
+    "user": "john_doe",
+    "credit_rating": "excellent"
   }
 ]

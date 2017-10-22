@@ -71,7 +71,8 @@ export default class Login extends PureComponent {
 
     return (
       <div className="login-container">
-      <img src={require('../../assets/logo.png')} width="250px" height="200px"/>
+      <div style={{ textAlign: "center" }}> <img src={require('../../assets/logo1.png')} width="400px" height="100px" style={{ paddingBottom: "50px", marginLeft: "-20px" }} />
+      </div>
         {
           bank !== undefined ?
             <div className="centerMargin">
@@ -115,7 +116,15 @@ export default class Login extends PureComponent {
               chooseBank={this.chooseBank}
             />
         }
-      </div>
+        {!displayProviders && 
+          <div className="value-proposition">
+            <h5>Feel secure no matter what you do, who you meet or where you are</h5>
+          </div>
+        }
+        {/* <div className="value-tagline">
+          <h6>DIGITAL SECURITY FOR THE PHYSICAL WORLD</h6>
+        </div> */}
+    </div>
     );
   }
 }

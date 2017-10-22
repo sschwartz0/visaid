@@ -27,7 +27,7 @@ class BankSelect extends React.PureComponent {
       <div className="bankselect-container">
         <BankItem
           onClick={this.onFocus}
-          name="Choose a Bank"
+          name="Choose Your Bank"
           className="choose-a-bank"
           dropdown
         />
