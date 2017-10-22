@@ -5,7 +5,8 @@ import { formChange, onSubmit, displayProvidersFunc, chooseBank } from './action
 
 import InputText from '../../components/InputText';
 import Button from '../../components/Button';
-import BankSelect from '../../components/BankSelect';
+import BankSelect from './BankSelect/BankSelect';
+import Header from './Welcome/Header';
 
 const mapStateToProps = state => {
   const {
@@ -67,12 +68,14 @@ export default class Login extends PureComponent {
       isLoginFormShown,
       selection,
     } = this.props;
-    console.log('bank', bank);
+
     return (
-      <div>
+      <div className="login-container">
+      <div style={{ textAlign: "center" }}> <img src={require('../../assets/logo1.png')} width="400px" height="100px" style={{ paddingBottom: "50px", marginLeft: "-20px" }} />
+      </div>
         {
           bank !== undefined ?
-            <div>
+            <div className="centerMargin">
               <InputText
                 className="test"
                 disabled={false}
@@ -92,23 +95,36 @@ export default class Login extends PureComponent {
               />
               <br />
               <Button
-                text="button"
+                text={
+                  <span 
+                    style={{ 
+                      color: 'white', 
+                    }}
+                  >
+                    Sign In
+                  </span>}
                 onClick={this.onSubmit}
               />
             </div>
           :
-            <div>
-              <BankSelect
-                selection={selection}
-                bank={bank}
-                displayProviders={displayProviders}
-                isLoginFormShow={isLoginFormShown}
-                onFocus={this.displayProvidersFunc}
-                chooseBank={this.chooseBank}
-              />
-            </div>
+            <BankSelect
+              selection={selection}
+              bank={bank}
+              displayProviders={displayProviders}
+              isLoginFormShow={isLoginFormShown}
+              onFocus={this.displayProvidersFunc}
+              chooseBank={this.chooseBank}
+            />
         }
-      </div>
+        {!displayProviders && 
+          <div className="value-proposition">
+            <h5>Feel secure no matter what you do, who you meet or where you are</h5>
+          </div>
+        }
+        {/* <div className="value-tagline">
+          <h6>DIGITAL SECURITY FOR THE PHYSICAL WORLD</h6>
+        </div> */}
+    </div>
     );
   }
 }

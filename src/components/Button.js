@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-require('../assets/styles.css');
-
 class Button extends React.PureComponent {
   static propTypes = {
     onClick: PropTypes.func.isRequired,
@@ -14,8 +12,17 @@ class Button extends React.PureComponent {
       onClick,
       text,
     } = this.props;
+    const style = {
+      'marginLeft': 'auto',
+      'marginRight': 'auto',
+      'border-radius': '2px !important',
+    };
     return (
-      <button onClick={onClick}>
+      <button 
+        onClick={onClick}
+        className="bank-item mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect border-radius"
+        style={style}
+      >
         {text}
       </button>
     );

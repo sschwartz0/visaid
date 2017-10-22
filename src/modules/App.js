@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Login from './login/Container';
 import Identification from './identification/Container';
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = state => {
   const {
     login: {
       loggedIn,
@@ -28,7 +28,7 @@ export default class App extends PureComponent {
     } = this.props;
     return (
       <div className="container">
-        {loggedIn ?
+        {!loggedIn ?
           <Login />
           :
           <Identification />

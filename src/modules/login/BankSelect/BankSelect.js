@@ -24,25 +24,24 @@ class BankSelect extends React.PureComponent {
       displayProviders,
     } = this.props;
     return (
-      <div>
-        {
-          displayProviders
-          ?
-            selection.map(
-              value => {
-                return (
-                  <BankItem
-                    key={value.name}
-                    name={value.name}
-                    onClick={this.chooseBank}
-                  />
-                );
-            })
-          :
-            <BankItem
-              onClick={this.onFocus}
-              name="Choose a Bank"
-            />
+      <div className="bankselect-container">
+        <BankItem
+          onClick={this.onFocus}
+          name="Choose Your Bank"
+          className="choose-a-bank"
+          dropdown
+        />
+        {displayProviders &&
+          selection.map((value, index) => {
+              return (
+                <BankItem
+                  key={value.name}
+                  name={value.name}
+                  onClick={this.chooseBank}
+                  className={index === 2 ? 'bank-item-last' : ''}
+                />
+              );
+          })
         }
       </div>
     );
