@@ -1,36 +1,93 @@
 const fs = require('fs');
 const { join } = require('path');
 const fileName = "../mock-db/requests.json";
-const requestsDB = require(join(__dirname, fileName));
 
 
 const createSession = function (req, res) {
-    if (!requestsDB[req.body.internalAccountID]) {
-        requestsDB[req.body.internalAccountID] = {
-            safetyCode: req.body.safetyCode,
-            expirationTime: Date.now() + 300000,
-            status: "CREATED",
-            location: req.body.location,
-            permissions: req.body.permissions.reduce((acc,ele) => {
-              acc[ele] = true;
-              return acc;
-            }, {})
-        };
-        fs.writeFile(join(__dirname,fileName), JSON.stringify(requestsDB, null, 2), (err) => {
-        if (err) res.send(err);
-        else res.send('success!');
+  fs.readFile(join(__dirname, fileName), 'utf-8', (err, requestsDB) => {
+    requestsDB = JSON.parse(requestsDB);
+    if (err) res.send(err);
+    if (!req.body.safetyCode) {
+      let safetyCode = generateSafetyCode(requestsDB);
+      requestsDB[safetyCode] = {
+          cardId: req.body.cardId,
+          expirationTime: Date.now() + 300000,
+          status: "CREATED",
+          location: req.body.location,
+          permissions: req.body.permissions.reduce((acc,ele) => {
+            acc[ele] = true;
+            return acc;
+          }, {})
+      };
+      fs.writeFile(join(__dirname,fileName), JSON.stringify(requestsDB, null, 2), (err) => {
+      if (err) res.send(err);
+      else {
+        res.json({
+          safetyCode: safetyCode
         });
+      }
+      });
     } else {
-        res.send('Session already exists');
-    }
+      let safetyCode = req.body.safetyCode;
+      if (!req.body.permissions.length) {
+        deleteSession(requestsDB, safetyCode, res);
+        return;
+      }
+      if (requestsDB[safetyCode].cardId === req.body.cardId) {
+        requestsDB[safetyCode].permissions = req.body.permissions.reduce((acc,ele) => {
+          acc[ele] = true;
+          return acc;
+        }, {});
+        fs.writeFile(join(__dirname,fileName), JSON.stringify(requestsDB, null, 2), (err) => {
+          if (err) res.send(err);
+          else {
+            res.send('session updated');
+          }
+          });
+      } else {
+        res.send('Card ID mismatch error');
+      }
+  }
+  });
 }
 
+const getSession = function (req, res) {
+  fs.readFile(join(__dirname, fileName), 'utf-8', (err, requestsDB) => {
+    if (err) res.send(err);
+    let session = requestsDB[req.params.safetyCode];
+    if (!session) {
+      res.send('no active sessions found with that code');
+    } else {
+      res.json({
+        permissions: session.permissions
+      });
+    }
+  });
+}
+
+const deleteSession = function (db, safetyCode, res) {
+  delete db[safetyCode];
+  fs.writeFile(join(__dirname,fileName), JSON.stringify(db, null, 2), (err) => {
+    if (err) res.send(err);
+    else {
+      res.send('session deleted');
+    }
+    });
+}
+
+const generateSafetyCode = function(db) {
+  let safetyCode = Math.floor(Math.random() * 900000);
+  while (db[safetyCode]) {
+    safetyCode = Math.floor(Math.random() * 900000);
+  }
+  return safetyCode;
+}
 /*
-Request Body Schema
+createSession request Body Schema
     {
-        safetyCode: string,
-        internalAccountID: string,
+        cardId: string,
         permissions: string[]
+        safetyCode?: string (if available)
     }
 
 
@@ -45,7 +102,10 @@ DB Schema
     }
   }
 
-  SAMPLE COMMAND
-  curl -H "Content-Type: application/json" -X POST -d '{"safetyCode":"123456","internalAccountID":"efkhwr3tn43tkfewkjfnskjfn36", "permissions": ["Name", "Address", "Credit Score"]}' localhost:3000/v1/requests
+  SAMPLE Post COMMAND
+  curl -H "Content-Type: application/json" -X POST -d '{"cardId":"23r33t2g24t24g24g42", "permissions": ["Name", "Address", "Credit Score"]}' localhost:3000/v1/requests
 */
-module.exports = { createSession: createSession };
+module.exports = { 
+  createSession: createSession,
+  getSession: getSession
+ };
