@@ -94,7 +94,14 @@ export default class Login extends PureComponent {
               />
               <br />
               <Button
-                text="button"
+                text={
+                  <span 
+                    style={{ 
+                      color: 'white', 
+                    }}
+                  >
+                    Sign In
+                  </span>}
                 onClick={this.onSubmit}
               />
             </div>

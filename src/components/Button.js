@@ -15,11 +15,12 @@ class Button extends React.PureComponent {
     const style = {
       'marginLeft': 'auto',
       'marginRight': 'auto',
+      'border-radius': '2px !important',
     };
     return (
       <button 
         onClick={onClick}
-        className="bank-item mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"
+        className="bank-item mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect border-radius"
         style={style}
       >
         {text}
