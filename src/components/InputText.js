@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 export default class InputText extends PureComponent {
   static propTypes = {
     className: PropTypes.string.isRequired,
-    value: PropTypes.string,
+    value: PropTypes.any,
     disabled: PropTypes.bool,
     name: PropTypes.string.isRequired,
     placeholder: PropTypes.string.isRequired,
