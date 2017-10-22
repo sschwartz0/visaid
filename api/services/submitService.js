@@ -80,7 +80,7 @@ const formatData = function (responseOb, permission) {
     return responseOb.resource.isPrimary;
   }
   if (permission === 'dateOfBirth') {
-    return responseOb.resource.dateOfBirth;
+    return null;
   }
   if (permission === 'creditRating') {
     return 'Excellent';

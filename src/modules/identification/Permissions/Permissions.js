@@ -28,7 +28,7 @@ export default class Permissions extends PureComponent {
     } = this.props;
 
     return (
-      <div>
+      <div style={{ overflowY: 'auto', overflowX: 'hidden' }}>
         {status === 'SENT' &&
           <div className="applicant-congrats">
             <h1>Congrats, it was sent!</h1>
