@@ -26,17 +26,12 @@ export default class Permission extends PureComponent {
       requested: !requested,
       permissionKey,
     });
-    
-    this.setState({
-      showDescription: !requested,
-    })
   }
   
   onShowDescription = () => {
-    if (!this.props.requested)
-      this.setState({
-        showDescription: !this.state.showDescription,
-      });
+    this.setState({
+      showDescription: !this.state.showDescription,
+    });
   };
 
   render() {
@@ -55,20 +50,24 @@ export default class Permission extends PureComponent {
 
     return (
       <div>
-        <div onClick={this.onShowDescription}>
-          <label 
-            htmlFor={permissionKey}
-          >
-            {name} - 
-          </label>
-          <input
-            type="checkbox"
-            name={permissionKey}
-            checked={requested}
-            disabled={!enabled}
-            onChange={this.onRequestPermission}
-          />
-        </div>
+        <div className="permissionBox">
+          <div onClick={this.onShowDescription}>
+            <label 
+              htmlFor={permissionKey}
+            >
+              {name}
+            </label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              name={permissionKey}
+              checked={requested}
+              disabled={!enabled}
+              onChange={this.onRequestPermission}
+            />
+            </div>
+          </div>
         {showDescription &&
           <div>
             {description}
