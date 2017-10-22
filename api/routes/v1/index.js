@@ -1,14 +1,17 @@
-const express = require('express'),
-      userService = require('../../services/userService'),
-      SubmitService = require('../../services/submitService'),
-      RequestService = require("./../../services/requestService"),
-      fs = require('fs'),
-      {join}= require('path'),
-      router = express.Router();
+const express = require('express');
+const UserService = require('../../services/userService');
+const SubmitService = require('../../services/submitService');
+const RequestService = require('./../../services/requestService');
 
-router.get('/users/:id', userService.getUser);
+const router = express.Router();
 
-router.post('/requests', RequestService.createSession);
+router.get('/users/:id', UserService.getUser);
+
+router.get('/requests', RequestService.getRequest);
+
+router.post('/requests', RequestService.createRequest);
+
+router.post('/users/card', UserService.getCardId);
 
 router.get('/requests/:safetyCode', RequestService.getSession);
 
