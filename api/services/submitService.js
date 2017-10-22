@@ -14,12 +14,11 @@ const submitResponse = function (req, res) {
     });
     session.status = 'INPROGRESS';
     fs.writeFile(join(__dirname, fileName), JSON.stringify(requestsDB, null, 2), (err) => {
-      if (err) res.status(500).send(err);
+      if (err) return res.status(500).send(err);
       getUserInfo()
-        .then(user => {
-          /* asdfasdfd */
-          res.send('Verifiasdf isdf  fucked');
-        })
+        .then(user => fs.readFile(join(__dirname, fileName), 'utf-8', (err, newDb) => {
+          const db = JSON.parse(newDb);
+        }))
         .catch(err => console.log(err));
     });
   });

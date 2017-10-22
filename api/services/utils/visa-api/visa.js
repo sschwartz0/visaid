@@ -2,6 +2,7 @@ const request = require('request');
 const config = require('config');
 const fs = require('fs');
 const Promise = require('bluebird');
+const path = require('path');
 
 const req = request.defaults();
 
@@ -13,8 +14,8 @@ const headers = {
   Accept: 'application/json',
   Authorization: getBasicAuthHeader(config.get('visa.VISA_USER_ID'), config.get('visa.VISA_PASSWORD'))
 };
-const key = fs.readFileSync('/Users/jimmyhuynh/visaid/privateKey.pem');
-const cert = fs.readFileSync('/Users/jimmyhuynh/visaid/cert.pem');
+const key = fs.readFileSync(path.join(__dirname, '../../../../privateKey.pem'));
+const cert = fs.readFileSync(path.join(__dirname, '../../../../cert.pem'));
 
 const createCardId = () => {
   const body = {
@@ -27,7 +28,7 @@ const createCardId = () => {
   };
 
   return new Promise((resolve, reject) =>
-    req.post({ uri, key, cert, headers: { ...headers, 'Content-Type': 'application/json' }, json: body }, (err, res, body) => {
+    req.post({ uri, key, cert, headers: Object.assign({ 'Content-Type': 'application/json' }, headers), json: body }, (err, res, body) => {
       if (err) reject(err);
       resolve(body);
     }));
