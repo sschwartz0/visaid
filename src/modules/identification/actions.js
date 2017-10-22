@@ -86,7 +86,7 @@ export const sendVerification = () => (dispatch, getState) => {
     code,
     permissions,
   } = identification;
-  
+
   const transformedPermissions = Object.keys(permissions).reduce((acc, permissionName) => {
     return { ...acc, [permissionName]: permissions[permissionName].requested };
   }, {});
@@ -109,9 +109,9 @@ export const longPoll = code => async (dispatch, getState) => {
     status,
     requestStatus,
   } = identification;
-  
+
   console.log(code)
-  
+
   const serverStatus = window.setInterval(() => {
     axios.get(`http://localhost:3000/v1/requests/status/${code}`)
       .then(response => {
@@ -123,30 +123,26 @@ export const longPoll = code => async (dispatch, getState) => {
           });
         }
         if (response.data.status === "COMPLETE" && status !== "REQUESTOR_WAITING") {
-          
-          
+
+
           window.clearInterval(serverStatus);
           axios.get(`http://localhost:3000/v1/requests/${code}`)
-          .then(response => {
-            const permissions = response.data.permissions;
-            console.log(response.data)
-            Object.entries(permissions).forEach(([permissionKey, requested]) => {
-              console.log(permissionKey, requested)
-              dispatch({
-                type: 'REQUEST_PERMISSION',
-                permissionKey,
-                requested,
-              });
-              
+            .then(response => {
+              const permissions = response.data.permissions;
+              console.log(response.data)
+              // Object.entries(permissions).forEach(([permissionKey, requested]) => {
+              //   console.log(permissionKey, requested)
+              //   dispatch({
+              //     type: 'REQUEST_PERMISSION',
+              //     permissionKey,
+              //     requested,
+              //   });
+
               dispatch({
                 type: 'CHANGE_STATUS',
                 status: 'RECEIVED'
               })
             });
-          })
-          .catch(error => {
-            console.log(error);
-          });
         }
       })
       .catch(error => {

@@ -9,21 +9,39 @@ const initialState = {
       requested: false,
       value: undefined,
     },
-    picture: {
-      name: 'Picture',
-      description: 'You will receive a picture of the user',
+    name: {
+      name: 'Name',
+      description: 'You will receive the users full name',
       requested: false,
       value: undefined,
     },
-    employment_status: {
+    mobileNumber: {
       name: 'Employment Status',
-      description: 'You will receive the users current employment status',
+      description: 'You will receive the area code and last four digits of the users cell phone',
       requested: false,
       value: undefined,
     },
-    occupation: {
+    homeNumber: {
       name: 'Occupation',
-      description: 'You will receive the users current occupation',
+      description: 'You will receive the area code and last four digits of the users home phone',
+      requested: false,
+      value: undefined,
+    },
+    ssn: {
+      name: 'Social Security Number',
+      description: 'We will verify that the user has a valid Social Security Number',
+      requested: false,
+      value: undefined,
+    },
+    birthday: {
+      name: 'Birthday',
+      description: 'You will receive the users date of birth',
+      requested: false,
+      value: undefined,
+    },
+    primary: {
+      name: 'Primary',
+      description: 'We will verify that the user is the primary account holder',
       requested: false,
       value: undefined,
     },
