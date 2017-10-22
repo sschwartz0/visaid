@@ -8,51 +8,41 @@ export const formChange = ({ name, value }) => dispatch => {
   });
 };
 
-export const generateCode = () => async dispatch => {
-  const code = Math.floor(Math.random() * (999999 - 100000 + 1) + 100000);
+export const requestPermission = ({ permissionKey, requested }) => async (dispatch, getState) => {
 
   await dispatch({
-    type: 'GENERATE_CODE',
-    code,
-  });
-
-  // axios.post('localhost:3000/v1/requests', {
-  //   safetyCode: code,
-  // })
-  //   .then(function (response) {
-  //     console.log(response);
-  //   })
-  //   .catch(function (error) {
-  //     console.log(error);
-  //   });
-  
-  axios.get('http://localhost:3000/v1/users/1', {
-  })
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-};
-
-export const requestPermission = ({ permissionKey, requested }) => (dispatch, getState) => {
-  const codeGenerated = !!getState().identification.code;
-
-  if (!codeGenerated) {
-    const code = Math.floor(Math.random() * (999999 - 100000 + 1) + 100000);
-    
-    dispatch({
-      type: 'GENERATE_CODE',
-      code,
-    });
-  }
-  
-  dispatch({
     type: 'REQUEST_PERMISSION',
     permissionKey,
     requested,
   });
+
+  const identification = getState().identification;
+  const {
+    code,
+    permissions,
+  } = identification;
+
+  const requestedPermissions = Object.values(permissions)
+    .filter(permission => permission.requested)
+    .map(({ name }) => name);
+
+  axios.post('http://localhost:3000/v1/requests', {
+    cardId: 'asdzx23',
+    permissions: requestedPermissions,
+    safetyCode: code,
+  })
+    .then(response => {
+      console.log(response.data)
+      dispatch({
+        type: 'GENERATE_CODE',
+        code: response.data.safetyCode,
+      });
+    })
+    .catch(error => {
+      console.log(error);
+    });
+
+
 };
 
 export const changeStatus = status => dispatch => {

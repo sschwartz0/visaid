@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import SafetyCode from './SafetyCode/SafetyCode';
 import Permissions from './Permissions/Permissions';
-import { changeStatus, formChange, generateCode, requestPermission } from './actions';
+import { changeStatus, formChange, requestPermission } from './actions';
 
 const mapStateToProps = state => {
   const {
@@ -27,7 +27,6 @@ const mapDispatchToProps = dispatch => {
   return {
     changeStatus: status => { dispatch(changeStatus(status)); },
     formChange: change => { dispatch(formChange(change)); },
-    generateCode: () => { dispatch(generateCode()); },
     requestPermission: permission => { dispatch(requestPermission(permission)); },
   };
 };
@@ -37,7 +36,6 @@ export default class Identification extends PureComponent {
   static propTypes = {
     code: PropTypes.string,
     changeStatus: PropTypes.func,
-    generateCode: PropTypes.func,
     formChange: PropTypes.func,
     isRequesting: PropTypes.bool,
     permissions: PropTypes.object,
@@ -66,14 +64,12 @@ export default class Identification extends PureComponent {
   onRequestPermission = async permission => {
     const {
       changeStatus,
-      generateCode,
       requestPermission,
       status,
     } = this.props;
     
     if (status === undefined) {
       changeStatus('REQUESTING');
-      generateCode();
     }
 
     requestPermission(permission);
