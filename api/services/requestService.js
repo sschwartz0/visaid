@@ -3,7 +3,6 @@ const { join } = require('path');
 
 const fileName = '../mock-db/requests.json';
 
-
 const createSession = function (req, res) {
   fs.readFile(join(__dirname, fileName), 'utf-8', (err, requestsDB) => {
     requestsDB = JSON.parse(requestsDB);
@@ -23,6 +22,17 @@ const createSession = function (req, res) {
       fs.writeFile(join(__dirname,fileName), JSON.stringify(requestsDB, null, 2), (err) => {
         if (err) res.status(500).send(err);
         else {
+          const checkStatusInterval = setInterval(() => {
+            checkStatus(safetyCode)
+              .then(status => {
+                if (status === 'INPROGRESS') {
+                  clearInterval(checkStatusInterval);
+                  return console.log('YUP');
+                }
+                return console.log(status);
+              })
+              .catch(err => console.log(err));
+          }, 2000);
           res.json({ safetyCode });
         }
       });
@@ -67,7 +77,7 @@ const getSession = function (req, res) {
       });
     }
   });
-}
+};
 
 const deleteSession = function (db, safetyCode, res) {
   delete db[safetyCode];
@@ -115,6 +125,15 @@ DB Schema
 
 
   */
+
+const checkStatus = (safetyCode) => {
+  return new Promise ((resolve, reject) => fs.readFile(join(__dirname, fileName), 'utf-8', (err, requestsDb) => {
+    if (err) reject(err);
+    const { status } = JSON.parse(requestsDb)[safetyCode];
+    resolve(status);
+  }));
+};
+
 module.exports = { 
   createSession,
   getSession

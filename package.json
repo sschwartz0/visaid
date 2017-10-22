@@ -6,8 +6,8 @@
   "scripts": {
     "start": "webpack-dev-server --open",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:api-server": "NODE_PATH=. nodemon ./bin/www",
-    "start:api-scott": "nodemon ./bin/www"
+    "start:api-server": "NODE_PATH=. node ./bin/www",
+    "start:api-scott": "node ./bin/www"
   },
   "repository": {
     "type": "git",
