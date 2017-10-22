@@ -75,7 +75,7 @@ export default class Login extends PureComponent {
       </div>
         {
           bank !== undefined ?
-            <div>
+            <div className="centerMargin">
               <InputText
                 className="test"
                 disabled={false}
@@ -95,7 +95,14 @@ export default class Login extends PureComponent {
               />
               <br />
               <Button
-                text="button"
+                text={
+                  <span 
+                    style={{ 
+                      color: 'white', 
+                    }}
+                  >
+                    Sign In
+                  </span>}
                 onClick={this.onSubmit}
               />
             </div>

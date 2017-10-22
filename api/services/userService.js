@@ -2,9 +2,20 @@ const { readFile } = require('fs');
 const { join } = require('path');
 const { pick } = require('lodash');
 const { pipe } = require('lodash/fp');
+const { getUserInfo } = require('../services/utils/visa-api/visa');
+
+const users = '../mock-db/users.json';
+
+exports.getUserDetail = (req, res, next) => {
+  getUserInfo()
+    .then(data => {
+      res.json(JSON.parse(data));
+    })
+    .catch(next);
+};
 
 exports.getUser = (req, res, next) => {
-  readFile(join(__dirname, '../mock-db/users.json'), 'utf-8', (err, data) => {
+  readFile(join(__dirname, users), 'utf-8', (err, data) => {
     if (err) return next(err);
     const { id } = req.params;
     const users = JSON.parse(data);
