@@ -99,7 +99,10 @@ export default class Identification extends PureComponent {
     } = this.props;
 
     return (
-      <div>
+      <div className="identification-container">
+        <div style={{ textAlign: "center" }}> 
+          <img src={require('../../assets/logo1.png')} width="400px" height="100px" style={{ paddingBottom: "50px", marginLeft: "-40px" }} />
+        </div>
         <SafetyCode
           code={code}
           formChange={this.onFormChange}

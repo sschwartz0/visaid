@@ -16,7 +16,6 @@ html, body {
   justify-content: center;
 }
 
-
 .login-container {
   display: flex;
   flex-direction: column;
@@ -24,6 +23,15 @@ html, body {
   justify-content: flex-start;
   width: 90%;
   height: 60%;
+}
+
+.identification-container {
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  justify-content: flex-start;
+  width: 80%;
+  height: 90%;
 }
 
 .header-container {
@@ -78,11 +86,31 @@ html, body {
   left: 20px;
 }
 
-.permissionBox {
+.permission-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #FAFAFA;
+  border-radius: 2px;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+  color: #757575 !important;
+  margin-bottom: 5px;
+}
+
+.permission-box {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 100%;
+  align-items: center;
+  width: 90%;
+  color: rgba(0,0,0,.54);
+  padding: 10px;
+  font-weight: 700;
+}
+
+.permission-description {
+  display: flex;
+  border-top: rgba(0, 0, 0, 0.1);
+  padding: 10px;
 }
 
 input {

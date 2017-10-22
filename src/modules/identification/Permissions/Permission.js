@@ -49,8 +49,8 @@ export default class Permission extends PureComponent {
     } = this.state;
 
     return (
-      <div>
-        <div className="permissionBox">
+      <div className="permission-container">
+        <div className="permission-box">
           <div onClick={this.onShowDescription}>
             <label 
               htmlFor={permissionKey}
@@ -69,7 +69,7 @@ export default class Permission extends PureComponent {
             </div>
           </div>
         {showDescription &&
-          <div>
+          <div className="permission-description">
             {description}
           </div>
         }
