@@ -53,9 +53,6 @@ const formatData = function (responseOb, permission) {
   if (permission === 'primary') {
     return permission;
   }
-  if (permission === 'primary') {
-    return permission;
-  }
   if (permission === 'birthday') {
     return permission;
   }
