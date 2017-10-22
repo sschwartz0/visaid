@@ -29,9 +29,10 @@ export default class Permissions extends PureComponent {
 
     return (
       <div>
-        {status === 'SENT' && 
-          <div>
-            Congrats it was received!
+        {status === 'SENT' &&
+          <div className="applicant-congrats">
+            <h1>Congrats, it was sent!</h1>
+            <img src="http://www.myiconfinder.com/uploads/iconsets/256-256-c0829a49b2acd49adeab380f70eb680a-accept.png" alt="check" height="125px" width="auto" />
           </div>
         }
         {status === 'RECEIVED' && Object.entries(sentPermissions).map(([key, value]) => {

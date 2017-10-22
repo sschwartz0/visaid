@@ -8,6 +8,7 @@ const submitResponse = function (req, res) {
   fs.readFile(join(__dirname, fileName), 'utf-8', (err, requestsDB) => {
     requestsDB = JSON.parse(requestsDB);
     const session = requestsDB[req.body.safetyCode];
+    let sentPermissions = requestsDB[req.body.safetyCode].permissions;
     if (!session) res.status(500).send('no active sessions found with that code');
     Object.keys(session.permissions).forEach(name => {
       session.permissions[name] = req.body.permissions[name];
@@ -22,8 +23,13 @@ const submitResponse = function (req, res) {
             newDB = JSON.parse(newDB);
             session.userData = {};
             Object.keys(session.permissions).forEach(permission => {
-              session.userData[permission] = formatData(user, permission);
+              session.userData[permission] = 1;//formatData(user, permission);
+              delete sentPermissions[permission];
             });
+            Object.keys(sentPermissions).forEach(ele => {
+                session.userData[ele] = null;
+            });
+            console.log(session)
             session.status = 'COMPLETE';
             fs.writeFile(join(__dirname, fileName), JSON.stringify(requestsDB, null, 2), (err) => {
               if (err) res.status(500).send(err);
@@ -37,24 +43,33 @@ const submitResponse = function (req, res) {
 };
 
 const formatData = function (responseOb, permission) {
-  if (permission === 'name') return responseOb.firstName + responseOb.lastName;
+  if (permission === 'Name') return responseOb.firstName + responseOb.lastName;
   if (permission === 'address') {
     const ob = Object.assign({}, responseOb.resource.address);
     delete ob.addressLine3;
     delete ob.country;
     return Object.keys(ob).reduce((acc, ele) => `${acc} ${ob[ele]}`, '');
   }
-  if (permission === 'mobileNumber' || permission === 'homeNumber') {
-    return `1 (${permission.slice(0, 2)}) ${permission.slice(2, 5)}-${permission.slice(5, 9)}}`;
+  if (permission === 'mobilePhoneNumber' || permission === 'homePhoneNumber') {
+    return `1 (${responseOb.resource[permission].slice(0, 2)}) *** -${responseOb.resource[permission].slice(5, 9)}}`;
   }
   if (permission === 'ssn') {
-    return `${permission.slice(0, 3)}-${permission.slice(3, 5)}-${permission.slice(5, 9)}`;
+    return `${responseOb.resource[permission].slice(0, 3)}-${responseOb.resource[permission].slice(3, 5)}-${responseOb.resource[permission].slice(5, 9)}`;
   }
-  if (permission === 'primary') {
-    return permission;
+  if (permission === 'isPrimary') {
+    return responseOb.resource.isPrimary;
   }
-  if (permission === 'birthday') {
-    return permission;
+  if (permission === 'dateOfBirth') {
+    return responseOb.resource.dateOfBirth;
+  }
+  if (permission === 'creditRating') {
+      return false;
+  }
+  if (permission === 'visaStanding') {
+      return true;
+  }
+  if (permission === 'income') {
+      return "$100,000+";
   }
   return null;
 };
