@@ -102,3 +102,55 @@ export const sendVerification = () => (dispatch, getState) => {
       console.log(error);
     });
 };
+
+export const longPoll = code => async (dispatch, getState) => {
+  const identification = await getState().identification;
+  const {
+    status,
+    requestStatus,
+  } = identification;
+  
+  console.log(code)
+  
+  const serverStatus = window.setInterval(() => {
+    axios.get(`http://localhost:3000/v1/requests/status/${code}`)
+      .then(response => {
+        console.log(response)
+        if (response.data.status !== requestStatus) {
+          dispatch({
+            type: 'CHANGE_REQUEST_STATUS',
+            requestStatus: response.data.status,
+          });
+        }
+        if (response.data.status === "COMPLETE" && status !== "REQUESTOR_WAITING") {
+          
+          
+          window.clearInterval(serverStatus);
+          axios.get(`http://localhost:3000/v1/requests/${code}`)
+          .then(response => {
+            const permissions = response.data.permissions;
+            console.log(response.data)
+            Object.entries(permissions).forEach(([permissionKey, requested]) => {
+              console.log(permissionKey, requested)
+              dispatch({
+                type: 'REQUEST_PERMISSION',
+                permissionKey,
+                requested,
+              });
+              
+              dispatch({
+                type: 'CHANGE_STATUS',
+                status: 'RECEIVED'
+              })
+            });
+          })
+          .catch(error => {
+            console.log(error);
+          });
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, 2000);
+}

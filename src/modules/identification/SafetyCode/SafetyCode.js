@@ -18,18 +18,20 @@ export default class SafetyCode extends PureComponent {
       code,
       status,
     } = this.props;
-    
+
     const isDisabled = status === 'REQUESTING';
 
     return (
-      <InputText
-        className="test"
-        disabled={isDisabled}
-        value={code || ''}
-        placeholder="Enter a code here or start requesting permissions"
-        name="code"
-        onChange={this.onFormChange}
-      />
+      <div className="safetycode-container">
+        <InputText
+          className="test"
+          disabled={isDisabled}
+          value={code || ''}
+          placeholder="Enter a code here or start requesting permissions"
+          name="code"
+          onChange={this.onFormChange}
+        />
+      </div>
     );
   }
 }
