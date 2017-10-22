@@ -7,7 +7,7 @@ const createSession = function (req, res) {
   fs.readFile(join(__dirname, fileName), 'utf-8', (err, requestsDB) => {
     requestsDB = JSON.parse(requestsDB);
     if (err) res.send(err);
-    if (!req.body.safetyCode) {
+    if (req.body.safetyCode === undefined) {
       let safetyCode = generateSafetyCode(requestsDB);
       requestsDB[safetyCode] = {
           cardId: req.body.cardId,

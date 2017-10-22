@@ -29,7 +29,7 @@ export default class App extends PureComponent {
 
     return (
       <div>
-        {!loggedIn ?
+        {loggedIn ?
           <Login />
           :
           <Identification />
