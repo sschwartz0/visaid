@@ -13,7 +13,7 @@ export default class ReceivedPermission extends PureComponent {
       value,
     } = this.props;
 
-    if (name === "creditRating") {
+    if (name === "Credit Rating") {
       return (
         <div className="received-permission-container-fair">
           <div className="received-permission-box fair">
@@ -27,7 +27,7 @@ export default class ReceivedPermission extends PureComponent {
         </div>
       )
     }
-    if (name === "visaStanding") {
+    if (name === "Visa Standing") {
       return (
         <div className="received-permission-container-great">
           <div className="received-permission-box great">
@@ -41,7 +41,7 @@ export default class ReceivedPermission extends PureComponent {
         </div>
       )
     }
-    if (name === "income") {
+    if (name === "Income") {
       return (
         <div className="received-permission-container-great">
           <div className="received-permission-box great">
