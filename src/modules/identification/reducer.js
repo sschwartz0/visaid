@@ -3,33 +3,9 @@ const initialState = {
   status: 'IDLE',
   requestStatus: undefined,
   permissions: {
-    address: {
-      name: 'Address',
-      description: 'You will receive the users city, zipcode and state',
-      requested: false,
-      value: undefined,
-    },
     name: {
       name: 'Name',
       description: 'You will receive the users full name',
-      requested: false,
-      value: undefined,
-    },
-    mobileNumber: {
-      name: 'Employment Status',
-      description: 'You will receive the area code and last four digits of the users cell phone',
-      requested: false,
-      value: undefined,
-    },
-    homeNumber: {
-      name: 'Occupation',
-      description: 'You will receive the area code and last four digits of the users home phone',
-      requested: false,
-      value: undefined,
-    },
-    ssn: {
-      name: 'Social Security Number',
-      description: 'We will verify that the user has a valid Social Security Number',
       requested: false,
       value: undefined,
     },
@@ -39,9 +15,27 @@ const initialState = {
       requested: false,
       value: undefined,
     },
-    primary: {
-      name: 'Primary',
-      description: 'We will verify that the user is the primary account holder',
+    address: {
+      name: 'Address',
+      description: 'You will receive the users city, zipcode and state',
+      requested: false,
+      value: undefined,
+    },
+    mobileNumber: {
+      name: 'Mobile Number',
+      description: 'You will receive the area code and last four digits of the users cell phone',
+      requested: false,
+      value: undefined,
+    },
+    employmentStatus: {
+      name: 'Employment Status',
+      description: 'We will verify the users current employment status',
+      requested: false,
+      value: undefined,
+    },
+    ssn: {
+      name: 'Social Security Number',
+      description: 'We will verify that the user has a valid Social Security Number',
       requested: false,
       value: undefined,
     },

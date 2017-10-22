@@ -95,7 +95,7 @@ html, body {
 }
 
 .safetycode-container {
-  width: 100%;
+
 }
 
 .permission-container {
@@ -166,7 +166,7 @@ html, body {
 }
 
 input {
-  width: 100%;
+  width: 90%;
 }
 
 input[type=checkbox] {
@@ -184,7 +184,7 @@ input[type=checkbox] {
   /* transition-duration: .2s; */
   transition-timing-function: cubic-bezier(.4,0,.2,1);
   /* visibility: hidden; */
-  width: 100% !important;
+  width: 10px;
 }
 
 .centerMargin {
