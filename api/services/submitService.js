@@ -43,7 +43,7 @@ const submitResponse = function (req, res) {
 };
 
 const formatData = function (responseOb, permission) {
-  if (permission === 'Name') return responseOb.firstName + responseOb.lastName;
+  if (permission === 'name') return responseOb.resource.name.firstName + responseOb.resource.name.lastName;
   if (permission === 'address') {
     const ob = Object.assign({}, responseOb.resource.address);
     delete ob.addressLine3;
@@ -63,13 +63,13 @@ const formatData = function (responseOb, permission) {
     return responseOb.resource.dateOfBirth;
   }
   if (permission === 'creditRating') {
-      return false;
+    return false;
   }
   if (permission === 'visaStanding') {
-      return true;
+    return true;
   }
   if (permission === 'income') {
-      return "$100,000+";
+    return "$100,000+";
   }
   return null;
 };
