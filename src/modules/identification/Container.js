@@ -3,7 +3,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import SafetyCode from './SafetyCode/SafetyCode';
 import Permissions from './Permissions/Permissions';
-import { changeStatus, formChange, requestPermission } from './actions';
+import { 
+  changeStatus, 
+  formChange, 
+  requestPermission, 
+  sendCode,
+  sendVerification,
+} from './actions';
 
 const mapStateToProps = state => {
   const {
@@ -28,6 +34,8 @@ const mapDispatchToProps = dispatch => {
     changeStatus: status => { dispatch(changeStatus(status)); },
     formChange: change => { dispatch(formChange(change)); },
     requestPermission: permission => { dispatch(requestPermission(permission)); },
+    sendCode: code => { dispatch(sendCode(code)); },
+    sendVerification: () => { dispatch(sendVerification()); },
   };
 };
 
@@ -42,26 +50,30 @@ export default class Identification extends PureComponent {
     requestPermission: PropTypes.func,
     isSendingResponse: PropTypes.bool,
     status: PropTypes.string,
+    sendCode: PropTypes.func,
+    sendVerification: PropTypes.func,
   };
 
   onFormChange = async field => {
     const {
-      code,
       formChange,
       changeStatus,
       status,
+      sendCode,
     } = this.props;
-    
+
     await formChange(field);
 
-    if (code.length === 5 && status !== 'SENDING')
+    if (field.value.length === 6) {
       changeStatus('SENDING');
+      sendCode(field.value);
+    }
   
-    if (code.length <= 6 && status === 'SENDING')
+    if (field.value.length !== 6 && status === 'SENDING')
       changeStatus(undefined);
-    };
+  };
   
-  onRequestPermission = async permission => {
+  onRequestPermission = permission => {
     const {
       changeStatus,
       requestPermission,
@@ -75,12 +87,14 @@ export default class Identification extends PureComponent {
     requestPermission(permission);
   };
   
+  onSendVerification = () => {
+    this.props.sendVerification();
+  };
+
   render() {
     const {
       code,
       permissions,
-      isRequesting,
-      isSendingResponse,
       status,
     } = this.props;
 
@@ -95,7 +109,7 @@ export default class Identification extends PureComponent {
           code={code}
           permissions={permissions}
           onRequestPermission={this.onRequestPermission}
-          isSendingResponse={isSendingResponse}
+          onSendVerification={this.onSendVerification}
           status={status}
         />
       </div>

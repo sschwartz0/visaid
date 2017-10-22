@@ -22,10 +22,10 @@ export const requestPermission = ({ permissionKey, requested }) => async (dispat
     permissions,
   } = identification;
 
-  const requestedPermissions = Object.values(permissions)
-    .filter(permission => permission.requested)
-    .map(({ name }) => name);
-    
+  const requestedPermissions = Object.entries(permissions)
+    .filter(([key, { requested }]) => requested)
+    .map(([key, value]) => key);
+
   axios.post('http://localhost:3000/v1/requests', {
     cardId: 'asdzx23',
     permissions: requestedPermissions,
@@ -60,3 +60,41 @@ export const changeStatus = status => dispatch => {
     status,
   });
 };
+
+export const sendCode = code => dispatch => {
+  console.log('sendcode!', code)
+  axios.get(`http://localhost:3000/v1/requests/${code}`)
+    .then(response => {
+      const permissions = response.data.permissions;
+      Object.entries(permissions).forEach(([permissionKey, requested]) => {
+        console.log(permissionKey, requested)
+        dispatch({
+          type: 'REQUEST_PERMISSION',
+          permissionKey,
+          requested,
+        });
+      });
+    })
+    .catch(error => {
+      console.log(error);
+    });
+};
+
+export const sendVerification = () => (dispatch, getState) => {
+  const identification = getState().identification;
+  const {
+    code,
+    permissions,
+  } = identification;
+    
+  axios.post('http://localhost:3000/v1/submit', {
+    permissions,
+    safetyCode: code,
+  })
+    .then(response => {
+      console.log(response);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+}

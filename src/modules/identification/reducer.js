@@ -27,6 +27,7 @@ const initialState = {
       value: undefined,
     },
   },
+  sendingPermissions: {},
 };
 
 const reducer = (state = initialState, action) => {
@@ -64,13 +65,13 @@ const reducer = (state = initialState, action) => {
 
     case 'REQUEST_PERMISSION': {
       const { 
-        permissionKey, 
+        permissionKey,
         requested,
       } = action;
-
+console.log('reducer', action)
       return {
         ...state,
-        permissions: { 
+        permissions: {
           ...state.permissions, 
           [permissionKey]: {
             ...state.permissions[permissionKey],
@@ -78,6 +79,31 @@ const reducer = (state = initialState, action) => {
           },
         },
       };
+    }
+    
+    case 'ACCEPT_PERMISSION': {
+      const {
+        permissionKey,
+        accepted,
+      } = action;
+      
+      return {
+        ...state,
+        sendingPermissions: {
+          ...state.sendingPermissions,
+          [permissionKey]: {
+            ...state.sendingPermissions[permissionKey],
+            accepted,
+          },
+        },
+      };
+    }
+    
+    case 'SEND_ALL_PERMISSIONS': {
+      return {
+        ...state,
+        // TAKE VALUES FROM SENDINGPERMISSIONS AND PUT THEM INTO THE PERMISSIONS ARRAY
+      }
     }
 
     default:

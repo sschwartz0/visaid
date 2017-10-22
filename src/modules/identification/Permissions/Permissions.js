@@ -1,12 +1,14 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Permission from './Permission';
+import Button from '../../../components/Button';
 
 export default class Permissions extends PureComponent {
   static propTypes = {
     enabled: PropTypes.bool,
     permissions: PropTypes.object,
     onRequestPermission: PropTypes.func,
+    onSendVerification: PropTypes.func,
   };
   
   static defaultProps = {
@@ -18,6 +20,7 @@ export default class Permissions extends PureComponent {
       enabled,
       permissions,
       onRequestPermission,
+      onSendVerification,
       status,
     } = this.props;
 
@@ -58,6 +61,12 @@ export default class Permissions extends PureComponent {
                 />
               );
         })}
+        {status === 'SENDING' && 
+          <Button
+            text="Send your verification"
+            onClick={onSendVerification}
+          />
+        }
       </div>
 
     );
