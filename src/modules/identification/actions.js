@@ -35,3 +35,23 @@ export const generateCode = () => async dispatch => {
       console.log(error);
     });
 };
+
+export const requestPermission = ({ permissionKey, name, requested }) => (dispatch, getState) => {
+  
+  const codeGenerated = !!getState().identification.code;
+  console.log(codeGenerated)
+  if (!codeGenerated) {
+    const code = Math.floor(Math.random() * (999999 - 100000 + 1) + 100000);
+    
+    dispatch({
+      type: 'GENERATE_CODE',
+      code,
+    });
+  }
+  
+  dispatch({
+    type: 'REQUEST_PERMISSION',
+    permissionKey,
+    requested,
+  });
+};

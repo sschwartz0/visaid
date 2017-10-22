@@ -4,14 +4,14 @@ import InputText from '../../../components/InputText';
 
 export default class SafetyCode extends PureComponent {
   static propTypes = {
-    code: PropTypes.string,
+    code: PropTypes.number,
     formChange: PropTypes.func,
     isRequesting: PropTypes.bool,
   };
 
   onFormChange = field => {
     this.props.formChange(field);
-  }
+  };
 
   render() {
     const {
