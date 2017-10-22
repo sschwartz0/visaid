@@ -10,4 +10,5 @@ router.get('/users/:id', userService.getUser);
 
 router.post('/requests', RequestService.createSession);
 
+router.get('/requests/:safetyCode', RequestService.getSession);
 module.exports = router;
