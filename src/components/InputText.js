@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import ButtonKey from './ButtonKey';
 
 export default class InputText extends PureComponent {
   static propTypes = {
@@ -35,19 +36,32 @@ export default class InputText extends PureComponent {
     } = this.props;
 
     return (
-      <div
-        className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded"
-        data-upgraded=",MaterialTextfield"
-      >
-        <input
-          type="text"
-          className="mdl-textfield__input inputText inputTextStyle"
-          disabled={disabled}
-          name={name}
-          onChange={this.onChange}
-          value={value}
-          placeholder={placeholder}
-        />
+      <div>
+        {
+          disabled &&
+          <div>
+            <ButtonKey
+              text={value}
+            />
+          </div>
+        }
+        {
+          !disabled &&
+          <div
+            className={disabled && 'mdl-textfield mdl-js-textfield mdl-textfield--floating-label is-upgraded'}
+            data-upgraded={disabled && ',MaterialTextfield'}
+          >
+            <input
+              type="text"
+              className="mdl-textfield__input inputText inputTextStyle"
+              disabled={disabled}
+              name={name}
+              onChange={this.onChange}
+              value={value}
+              placeholder={placeholder}
+            />
+          </div>
+        }
       </div>
     );
   }
