@@ -5,7 +5,8 @@ import { formChange, onSubmit, displayProvidersFunc, chooseBank } from './action
 
 import InputText from '../../components/InputText';
 import Button from '../../components/Button';
-import BankSelect from '../../components/BankSelect';
+import BankSelect from './BankSelect/BankSelect';
+import Header from './Welcome/Header';
 
 const mapStateToProps = state => {
   const {
@@ -69,7 +70,11 @@ export default class Login extends PureComponent {
     } = this.props;
     console.log('bank', bank);
     return (
-      <div>
+      <div className="login-container">
+        <Header
+          image="logo.png"
+          text="test"
+        />
         {
           bank !== undefined ?
             <div>

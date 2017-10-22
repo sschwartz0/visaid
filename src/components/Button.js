@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-require('../assets/styles.css');
-
 class Button extends React.PureComponent {
   static propTypes = {
     onClick: PropTypes.func.isRequired,
