@@ -44,17 +44,17 @@ const formatData = function (responseOb, permission) {
     delete ob.country;
     return Object.keys(ob).reduce((acc, ele) => `${acc} ${ob[ele]}`, '');
   }
-  if (permission === 'mobileNumber' || permission === 'homeNumber') {
-    return `1 (${permission.slice(0, 2)}) ${permission.slice(2, 5)}-${permission.slice(5, 9)}}`;
+  if (permission === 'mobilePhoneNumber' || permission === 'homePhoneNumber') {
+    return `1 (${responseOb.resource[permission].slice(0, 2)}) *** -${responseOb.resource[permission].slice(5, 9)}}`;
   }
   if (permission === 'ssn') {
-    return `${permission.slice(0, 3)}-${permission.slice(3, 5)}-${permission.slice(5, 9)}`;
+    return `${responseOb.resource[permission].slice(0, 3)}-${responseOb.resource[permission].slice(3, 5)}-${responseOb.resource[permission].slice(5, 9)}`;
   }
-  if (permission === 'primary') {
-    return permission;
+  if (permission === 'isPrimary') {
+    return responseOb.resource.isPrimary;
   }
-  if (permission === 'birthday') {
-    return permission;
+  if (permission === 'dateOfBirth') {
+    return responseOb.resource.dateOfBirth;
   }
   return null;
 };
