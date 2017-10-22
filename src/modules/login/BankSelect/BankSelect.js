@@ -28,14 +28,17 @@ class BankSelect extends React.PureComponent {
         <BankItem
           onClick={this.onFocus}
           name="Choose a Bank"
+          className="choose-a-bank"
+          dropdown
         />
         {displayProviders &&
-          selection.map(value => {
+          selection.map((value, index) => {
               return (
                 <BankItem
                   key={value.name}
                   name={value.name}
                   onClick={this.chooseBank}
+                  className={index === 2 ? 'bank-item-last' : ''}
                 />
               );
           })

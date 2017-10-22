@@ -19,15 +19,31 @@ class BankSelect extends React.PureComponent {
     const {
       name,
       logo,
+      className,
+      dropdown,
     } = this.props;
-    return (
+    if (dropdown) {
+      return (
       <div 
-        className="bankItem" 
-        onClick={this.onClick}>
-        {name}
+        className={`choose-a-bank mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect`} 
+        onClick={this.onClick}
+      >
+        <span> {name} </span>
+        <i className="material-icons">keyboard_arrow_down</i>
+      </div>
+      )
+    }
+    else if (!dropdown) {
+    return(
+      <div 
+        className={`bank-item mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect ${className}`} 
+        onClick={this.onClick}
+      >
+        <span style={{ color: "#FFF" }}> {name} </span>
         {logo}
       </div>
-    );
+    )
+  }
   }
 }
 export default BankSelect;

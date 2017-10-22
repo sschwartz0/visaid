@@ -68,13 +68,10 @@ export default class Login extends PureComponent {
       isLoginFormShown,
       selection,
     } = this.props;
-    console.log('bank', bank);
+
     return (
       <div className="login-container">
-        <Header
-          image="logo.png"
-          text="test"
-        />
+      <img src={require('../../assets/logo.png')} width="250px" height="200px"/>
         {
           bank !== undefined ?
             <div>
@@ -102,16 +99,14 @@ export default class Login extends PureComponent {
               />
             </div>
           :
-            <div>
-              <BankSelect
-                selection={selection}
-                bank={bank}
-                displayProviders={displayProviders}
-                isLoginFormShow={isLoginFormShown}
-                onFocus={this.displayProvidersFunc}
-                chooseBank={this.chooseBank}
-              />
-            </div>
+            <BankSelect
+              selection={selection}
+              bank={bank}
+              displayProviders={displayProviders}
+              isLoginFormShow={isLoginFormShown}
+              onFocus={this.displayProvidersFunc}
+              chooseBank={this.chooseBank}
+            />
         }
       </div>
     );
