@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import InputText from '../../../components/InputText';
 
-
 export default class SafetyCode extends PureComponent {
   static propTypes = {
     code: PropTypes.string,
@@ -19,7 +18,7 @@ export default class SafetyCode extends PureComponent {
       code,
       isRequesting,
     } = this.props;
-    
+
     return (
       <InputText
         className="test"
