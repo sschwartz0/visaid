@@ -62,9 +62,8 @@ export const changeStatus = status => dispatch => {
 };
 
 export const sendCode = code => dispatch => {
-  axios.get('http://localhost:3000/v1/requests', {
-    safetyCode: code,
-  })
+  console.log('sendcode!', code)
+  axios.get(`http://localhost:3000/v1/requests/${code}`)
     .then(response => {
       console.log(response)
     })

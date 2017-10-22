@@ -64,13 +64,13 @@ const reducer = (state = initialState, action) => {
 
     case 'REQUEST_PERMISSION': {
       const { 
-        permissionKey, 
+        permissionKey,
         requested,
       } = action;
 
       return {
         ...state,
-        permissions: { 
+        permissions: {
           ...state.permissions, 
           [permissionKey]: {
             ...state.permissions[permissionKey],

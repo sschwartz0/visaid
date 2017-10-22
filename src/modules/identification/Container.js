@@ -48,24 +48,25 @@ export default class Identification extends PureComponent {
     requestPermission: PropTypes.func,
     isSendingResponse: PropTypes.bool,
     status: PropTypes.string,
+    sendCode: PropTypes.func,
   };
 
   onFormChange = async field => {
     const {
-      code,
       formChange,
       changeStatus,
       status,
+      sendCode,
     } = this.props;
-    
+
     await formChange(field);
 
-    if (code.length === 5 && status !== 'SENDING') {
+    if (field.value.length === 6) {
       changeStatus('SENDING');
-      sendCode(code);
+      sendCode(field.value);
     }
   
-    if (code.length <= 6 && status === 'SENDING')
+    if (field.value.length !== 6 && status === 'SENDING')
       changeStatus(undefined);
     };
   
@@ -82,7 +83,7 @@ export default class Identification extends PureComponent {
 
     requestPermission(permission);
   };
-  
+
   render() {
     const {
       code,
