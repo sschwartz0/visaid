@@ -41,7 +41,9 @@ const createSession = function (req, res) {
         fs.writeFile(join(__dirname,fileName), JSON.stringify(requestsDB, null, 2), (err) => {
           if (err) res.send(err);
           else {
-            res.send('session updated');
+            res.json({
+              safetyCode: safetyCode
+            });
           }
           });
       } else {
@@ -54,12 +56,19 @@ const createSession = function (req, res) {
 const getSession = function (req, res) {
   fs.readFile(join(__dirname, fileName), 'utf-8', (err, requestsDB) => {
     if (err) res.send(err);
+    requestsDB = JSON.parse(requestsDB);
     let session = requestsDB[req.params.safetyCode];
     if (!session) {
       res.send('no active sessions found with that code');
     } else {
-      res.json({
-        permissions: session.permissions
+      session.status = "PENDING";
+      fs.writeFile(join(__dirname,fileName), JSON.stringify(requestsDB, null, 2), (err) => {
+        if (err) res.send(err);
+        else {
+          res.json({
+            permissions: session.permissions
+          });
+        }
       });
     }
   });
@@ -76,9 +85,9 @@ const deleteSession = function (db, safetyCode, res) {
 }
 
 const generateSafetyCode = function(db) {
-  let safetyCode = Math.floor(Math.random() * 900000);
+  let safetyCode = Math.floor(100000 + Math.random() * 900000);
   while (db[safetyCode]) {
-    safetyCode = Math.floor(Math.random() * 900000);
+    safetyCode = Math.floor(100000 + Math.random() * 900000);
   }
   return safetyCode;
 }
@@ -104,7 +113,12 @@ DB Schema
 
   SAMPLE Post COMMAND
   curl -H "Content-Type: application/json" -X POST -d '{"cardId":"23r33t2g24t24g24g42", "permissions": ["Name", "Address", "Credit Score"]}' localhost:3000/v1/requests
-*/
+
+  SAMPE Get COMMAND
+    curl -H "Content-Type: application/json" -X GET localhost:3000/v1/requests/######
+
+
+  */
 module.exports = { 
   createSession: createSession,
   getSession: getSession
