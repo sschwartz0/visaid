@@ -15,13 +15,13 @@ const initialState = {
       requested: false,
       value: undefined,
     },
-    mobileNumber: {
+    mobilePhoneNumber: {
       name: 'Employment Status',
       description: 'You will receive the area code and last four digits of the users cell phone',
       requested: false,
       value: undefined,
     },
-    homeNumber: {
+    homePhoneNumber: {
       name: 'Occupation',
       description: 'You will receive the area code and last four digits of the users home phone',
       requested: false,
@@ -33,13 +33,13 @@ const initialState = {
       requested: false,
       value: undefined,
     },
-    birthday: {
+    dateOfBirth: {
       name: 'Birthday',
       description: 'You will receive the users date of birth',
       requested: false,
       value: undefined,
     },
-    primary: {
+    isPrimary: {
       name: 'Primary',
       description: 'We will verify that the user is the primary account holder',
       requested: false,

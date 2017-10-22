@@ -23,7 +23,7 @@ const submitResponse = function (req, res) {
             newDB = JSON.parse(newDB);
             session.userData = {};
             Object.keys(session.permissions).forEach(permission => {
-              session.userData[permission] = 1;//formatData(user, permission);
+              session.userData[permission] = formatData(user, permission);
               delete sentPermissions[permission];
             });
             Object.keys(sentPermissions).forEach(ele => {
@@ -43,7 +43,7 @@ const submitResponse = function (req, res) {
 };
 
 const formatData = function (responseOb, permission) {
-  if (permission === 'name') return responseOb.resource.name.firstName + responseOb.resource.name.lastName;
+  if (permission === 'name') return responseOb.resource.name.firstName + ' ' + responseOb.resource.name.lastName;
   if (permission === 'address') {
     const ob = Object.assign({}, responseOb.resource.address);
     delete ob.addressLine3;
@@ -51,7 +51,7 @@ const formatData = function (responseOb, permission) {
     return Object.keys(ob).reduce((acc, ele) => `${acc} ${ob[ele]}`, '');
   }
   if (permission === 'mobilePhoneNumber' || permission === 'homePhoneNumber') {
-    return `1 (${responseOb.resource[permission].slice(0, 2)}) *** -${responseOb.resource[permission].slice(5, 9)}}`;
+    return `1 (${responseOb.resource[permission].slice(0, 3)}) *** -${responseOb.resource[permission].slice(5, 9)}`;
   }
   if (permission === 'ssn') {
     return `${responseOb.resource[permission].slice(0, 3)}-${responseOb.resource[permission].slice(3, 5)}-${responseOb.resource[permission].slice(5, 9)}`;
@@ -63,7 +63,7 @@ const formatData = function (responseOb, permission) {
     return responseOb.resource.dateOfBirth;
   }
   if (permission === 'creditRating') {
-    return false;
+    return 'Excellent';
   }
   if (permission === 'visaStanding') {
     return true;
