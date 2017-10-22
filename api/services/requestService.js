@@ -23,21 +23,21 @@ const createSession = function (req, res) {
       fs.writeFile(join(__dirname, fileName), JSON.stringify(requestsDB, null, 2), (err) => {
         if (err) res.status(500).send(err);
         else {
-          const checkStatusInterval = setInterval(() => {
-            checkStatus(safetyCode)
-              .then(status => {
-                if (status === 'COMPLETE') {
-                  clearInterval(checkStatusInterval);
-                  return getUserInfo()
-                    .then(user => {
-                      console.log('hey', user);
-                    })
-                    .catch(err => console.log(err));
-                }
-                console.log(status);
-              })
-              .catch(err => console.log(err));
-          }, 2000);
+          // const checkStatusInterval = setInterval(() => {
+          //   checkStatus(safetyCode)
+          //     .then(status => {
+          //       if (status === 'COMPLETE') {
+          //         clearInterval(checkStatusInterval);
+          //         return getUserInfo()
+          //           .then(user => {
+          //             console.log('hey', user);
+          //           })
+          //           .catch(err => console.log(err));
+          //       }
+          //       console.log(status);
+          //     })
+          //     .catch(err => console.log(err));
+          // }, 2000);
           res.json({ safetyCode });
         }
       });
@@ -70,6 +70,9 @@ const getSession = function (req, res) {
     const session = requestsDB[req.params.safetyCode];
     if (!session) {
       res.status(500).send('no active sessions found with that code');
+    } if (session.status === 'COMPLETE') {
+      deleteSession(requestsDB, req.params.safetyCode);
+      res.json(session.userData);
     } else {
       session.status = 'PENDING';
       fs.writeFile(join(__dirname, fileName), JSON.stringify(requestsDB, null, 2), (err) => {
@@ -84,12 +87,28 @@ const getSession = function (req, res) {
   });
 };
 
-const deleteSession = function (db, safetyCode, res) {
+const checkStatus = function (req, res) {
+  fs.readFile(join(__dirname, fileName), 'utf-8', (err, requestsDB) => {
+    if (err) res.status(500).send(err);
+    requestsDB = JSON.parse(requestsDB);
+    const session = requestsDB[req.params.safetyCode];
+    if (!session) {
+      res.status(500).send('no active sessions found with that code');
+    } else {
+      res.json({
+        status: session.status
+      });
+    }
+  });
+}
+
+const deleteSession = function (db, safetyCode, res = null) {
   delete db[safetyCode];
   fs.writeFile(join(__dirname,fileName), JSON.stringify(db, null, 2), (err) => {
-    if (err) res.status(500).send(err);
+    if (err && res) res.status(500).send(err);
     else {
-      res.send('session deleted');
+      if (res) res.send('session deleted');
+      return;
     }
   });
 };
@@ -131,15 +150,16 @@ DB Schema
 
   */
 
-const checkStatus = (safetyCode) => {
-  return new Promise ((resolve, reject) => fs.readFile(join(__dirname, fileName), 'utf-8', (err, requestsDb) => {
-    if (err) reject(err);
-    const { status } = JSON.parse(requestsDb)[safetyCode];
-    resolve(status);
-  }));
-};
+// const checkStatus = (safetyCode) => {
+//   return new Promise ((resolve, reject) => fs.readFile(join(__dirname, fileName), 'utf-8', (err, requestsDb) => {
+//     if (err) reject(err);
+//     const { status } = JSON.parse(requestsDb)[safetyCode];
+//     resolve(status);
+//   }));
+// };
 
 module.exports = { 
   createSession,
-  getSession
+  getSession,
+  checkStatus
 };
