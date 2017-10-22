@@ -1,12 +1,10 @@
 {
-  "efkhwr3tn43tkfewkjfnskjfn36": {
-    "safetyCode": "123456",
-    "expirationTime": 1508632356609,
+  "79137": {
+    "cardId": "23r33t2g24t24g24g42",
+    "expirationTime": 1508647143053,
     "status": "CREATED",
     "permissions": {
-      "Name": true,
-      "Address": true,
-      "Credit Score": true
+      "name": true
     }
   }
 }
