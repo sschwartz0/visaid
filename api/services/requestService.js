@@ -11,9 +11,12 @@ const createSession = function(req, res) {
             expirationTime: Date.now() + 300000,
             status: "CREATED",
             location: req.body.location,
-            permissions: req.body.permissions.reduce((acc,ele) => acc[ele] = true, {})
+            permissions: req.body.permissions.reduce((acc,ele) => {
+              acc[ele] = true;
+              return acc;
+            }, {})
         };
-        fs.writeFile(join(__dirname,fileName), JSON.stringify(requestsDB,null,2 ), (err) => {
+        fs.writeFile(join(__dirname,fileName), JSON.stringify(requestsDB, null, 2), (err) => {
         if (err) res.send(err);
         else res.send('success!');
         });
