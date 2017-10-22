@@ -23,11 +23,31 @@ const submitResponse = function (req, res) {
             newDB = JSON.parse(newDB);
             session.userData = {};
             Object.keys(session.permissions).forEach(permission => {
-              session.userData[permission] = formatData(user, permission);
+              let beautified = '';
+              permission.split('').forEach((char, ind) => {
+                  if (ind === 0) {
+                    beautified += char.toUpperCase();
+                  } else if (char === char.toUpperCase()) {
+                    beautified = beautified + ' ' + char;
+                  } else {
+                    beautified += char;
+                  }
+              });
+              session.userData[beautified] = formatData(user, permission);
               delete sentPermissions[permission];
             });
             Object.keys(sentPermissions).forEach(ele => {
-                session.userData[ele] = null;
+                beautified = '';
+                ele.split('').forEach((char, ind) => {
+                    if (ind === 0) {
+                      beautified += char.toUpperCase();
+                    } else if (char === char.toUpperCase()) {
+                      beautified = beautified + ' ' + char;
+                    } else {
+                      beautified += char;
+                    }
+                });
+                session.userData[beautified] = null;
             });
             console.log(session)
             session.status = 'COMPLETE';
