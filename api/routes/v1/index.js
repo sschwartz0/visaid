@@ -16,5 +16,6 @@ router.post('/requests', RequestService.createSession);
 
 router.post('/submit', SubmitService.submitResponse);
 
+router.get('/requests/status/:safetyCode',RequestService.checkStatus);
 
 module.exports = router;
