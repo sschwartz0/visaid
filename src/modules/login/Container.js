@@ -20,6 +20,10 @@ const mapDispatchToProps = dispatch => {
 
 @connect(mapStateToProps, mapDispatchToProps)
 export default class Login extends PureComponent {
+  static propTypes = {
+    formChange: PropTypes.func,
+  };
+
   onFormChange = field => {
     this.props.formChange(field);
   }
