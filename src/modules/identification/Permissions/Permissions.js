@@ -36,7 +36,7 @@ export default class Permissions extends PureComponent {
             Congrats it was received!
           </div>
         }
-        {status !== 'SENT' && Object.entries(permissions).map(([key, {
+        {status !== 'SENT' && status !== 'RECEIVED' && Object.entries(permissions).map(([key, {
           name,
           description,
           requested,
