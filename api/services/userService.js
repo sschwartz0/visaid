@@ -19,4 +19,4 @@ exports.getUser = (req, res, next) => {
 const getUserById = (id, users) =>
   users.filter(user => +user.id === +id)[0];
 
-const filterByPermissions = (perms) => (user) => pick(user, perms);
+const filterByPermissions = (perms) => (user) => pick(user, perms.concat(['user']));

@@ -26,7 +26,7 @@ export const generateCode = () => async dispatch => {
   //     console.log(error);
   //   });
   
-  axios.get('localhost:3000/v1/users/1', {
+  axios.get('http://localhost:3000/v1/users/1', {
   })
     .then(function (response) {
       console.log(response);
