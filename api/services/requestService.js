@@ -1,5 +1,6 @@
 const fs = require('fs');
 const { join } = require('path');
+const { getUserInfo } = require('../services/utils/visa-api/visa');
 
 const fileName = '../mock-db/requests.json';
 
@@ -14,22 +15,26 @@ const createSession = function (req, res) {
         expirationTime: Date.now() + 300000,
         status: 'CREATED',
         location: req.body.location,
-        permissions: req.body.permissions.reduce((acc,ele) => {
+        permissions: req.body.permissions.reduce((acc, ele) => {
           acc[ele] = true;
           return acc;
         }, {})
       };
-      fs.writeFile(join(__dirname,fileName), JSON.stringify(requestsDB, null, 2), (err) => {
+      fs.writeFile(join(__dirname, fileName), JSON.stringify(requestsDB, null, 2), (err) => {
         if (err) res.status(500).send(err);
         else {
           const checkStatusInterval = setInterval(() => {
             checkStatus(safetyCode)
               .then(status => {
-                if (status === 'INPROGRESS') {
+                if (status === 'COMPLETE') {
                   clearInterval(checkStatusInterval);
-                  return console.log('YUP');
+                  return getUserInfo()
+                    .then(user => {
+                      console.log('hey', user);
+                    })
+                    .catch(err => console.log(err));
                 }
-                return console.log(status);
+                console.log(status);
               })
               .catch(err => console.log(err));
           }, 2000);
