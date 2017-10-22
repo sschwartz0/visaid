@@ -119,12 +119,12 @@ const reducer = (state = initialState, action) => {
     }
     
     case 'SEND_ALL_PERMISSIONS': {
-      const { permissions } = action;
+      const { sentPermissions } = action;
       
       return {
         ...state,
-        // TAKE VALUES FROM SENDINGPERMISSIONS AND PUT THEM INTO THE PERMISSIONS ARRAY
-      }
+        sentPermissions,
+      };
     }
     
     case 'CHANGE_REQUEST_STATUS': {
