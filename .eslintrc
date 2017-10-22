@@ -43,7 +43,7 @@
     "jsx-a11y/href-no-hash": "off", // this is here because it was breaking my eslint
     "react/jsx-wrap-multilines": 0,
     "jsx-a11y/no-noninteractive-element-interactions": 1,
-    "comma-dangle": "warn"
+    "comma-dangle": "off"
   },
   "globals": {
     "document": true,
