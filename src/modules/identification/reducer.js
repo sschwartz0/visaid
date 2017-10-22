@@ -46,7 +46,7 @@ const initialState = {
       value: undefined,
     },
   },
-  sendingPermissions: {},
+  sentPermissions: {},
 };
 
 const reducer = (state = initialState, action) => {
@@ -119,6 +119,8 @@ const reducer = (state = initialState, action) => {
     }
     
     case 'SEND_ALL_PERMISSIONS': {
+      const { permissions } = action;
+      
       return {
         ...state,
         // TAKE VALUES FROM SENDINGPERMISSIONS AND PUT THEM INTO THE PERMISSIONS ARRAY
