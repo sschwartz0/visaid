@@ -26,10 +26,9 @@ export default class App extends PureComponent {
     const {
       loggedIn,
     } = this.props;
-
     return (
       <div>
-        {loggedIn ?
+        {!loggedIn ?
           <Login />
           :
           <Identification />

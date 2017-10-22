@@ -11,3 +11,16 @@ export const onSubmit = () => dispatch => {
     type: 'ON_SUBMIT',
   });
 };
+
+export const displayProvidersFunc = () => dispatch => {
+  dispatch({
+    type: 'DISPLAY_PROVIDERS',
+  });
+};
+
+export const chooseBank = bank => dispatch => {
+  dispatch({
+    type: 'CHOOSE_BANK',
+    bank,
+  });
+};
