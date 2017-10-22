@@ -92,7 +92,9 @@ export const sendVerification = () => (dispatch, getState) => {
     safetyCode: code,
   })
     .then(response => {
-      console.log(response);
+      dispatch({
+        type: 'CONFIRMATION'
+      }),
     })
     .catch(error => {
       console.log(error);

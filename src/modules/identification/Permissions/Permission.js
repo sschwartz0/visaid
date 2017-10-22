@@ -50,7 +50,7 @@ export default class Permission extends PureComponent {
 
     return (
       <div>
-        <div className="permissionBox">
+        <div className="permissionBox mdl-textfield__input inputText inputTextStyle">
           <div onClick={this.onShowDescription}>
             <label 
               htmlFor={permissionKey}
