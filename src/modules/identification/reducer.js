@@ -4,25 +4,25 @@ const initialState = {
   permissions: {
     address: {
       name: 'Address',
-      description: 'Description',
+      description: 'You will receive the users city, zipcode and state',
       requested: false,
       value: undefined,
     },
     picture: {
       name: 'Picture',
-      description: 'Description',
-      requested: true,
+      description: 'You will receive a picture of the user',
+      requested: false,
       value: undefined,
     },
     employment_status: {
       name: 'Employment Status',
-      description: 'Description',
+      description: 'You will receive the users current employment status',
       requested: false,
       value: undefined,
     },
     occupation: {
       name: 'Occupation',
-      description: 'Description',
+      description: 'You will receive the users current occupation',
       requested: false,
       value: undefined,
     },

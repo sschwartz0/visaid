@@ -46,7 +46,7 @@ export default class Identification extends PureComponent {
     status: PropTypes.string,
   };
 
-  onFormChange = field => {
+  onFormChange = async field => {
     const {
       code,
       formChange,
@@ -54,12 +54,12 @@ export default class Identification extends PureComponent {
       status,
     } = this.props;
     
-    formChange(field);
-    
-    if (code === undefined && status !== 'SENDING')
+    await formChange(field);
+
+    if (code.length === 5 && status !== 'SENDING')
       changeStatus('SENDING');
   
-    if (code === undefined && status === 'SENDING')
+    if (code.length <= 6 && status === 'SENDING')
       changeStatus(undefined);
     };
   
