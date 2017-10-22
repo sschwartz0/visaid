@@ -68,7 +68,7 @@ export default class Identification extends PureComponent {
       status,
     } = this.props;
     
-    if (status === undefined) {
+    if (status === 'IDLE') {
       changeStatus('REQUESTING');
     }
 

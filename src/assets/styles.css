@@ -1,3 +1,23 @@
 button {
   /* width: 100%; */
 } 
+
+.container {
+  width: 400px;
+}
+
+.permissionBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+input {
+  width: 100%;
+}
+
+input[type=checkbox] {
+  height: 20px;
+  width: 20px;
+}

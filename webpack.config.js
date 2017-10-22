@@ -15,6 +15,7 @@ module.exports = {
       './assets/styles.css',
     ],
   },
+  cache: true,
   devtool: 'inline-eval-cheap-source-map',
   devServer: {
     contentBase: './dist',

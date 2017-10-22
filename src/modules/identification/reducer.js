@@ -1,6 +1,6 @@
 const initialState = {
   code: undefined,
-  status: undefined,
+  status: 'IDLE',
   permissions: {
     address: {
       name: 'Address',
