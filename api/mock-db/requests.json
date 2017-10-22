@@ -1,1 +1,120 @@
-{}
+{
+  "320463": {
+    "cardId": "asdzx23",
+    "expirationTime": 1508685422918,
+    "status": "PENDING",
+    "permissions": {
+      "picture": true,
+      "employment_status": true
+    }
+  },
+  "322495": {
+    "cardId": "asdzx23",
+    "expirationTime": 1508685089024,
+    "status": "CREATED",
+    "permissions": {
+      "address": true
+    }
+  },
+  "380998": {
+    "cardId": "asdzx23",
+    "expirationTime": 1508683295791,
+    "status": "CREATED",
+    "permissions": {
+      "address": true
+    }
+  },
+  "389360": {
+    "cardId": "asdzx23",
+    "expirationTime": 1508684244985,
+    "status": "CREATED",
+    "permissions": {
+      "address": true,
+      "picture": true
+    }
+  },
+  "593232": {
+    "cardId": "asdzx23",
+    "expirationTime": 1508683144123,
+    "status": "CREATED",
+    "permissions": {
+      "address": true,
+      "picture": true,
+      "employment_status": true,
+      "occupation": true
+    }
+  },
+  "623079": {
+    "cardId": "asdzx23",
+    "expirationTime": 1508685922887,
+    "status": "CREATED",
+    "permissions": {
+      "address": true,
+      "picture": true
+    }
+  },
+  "718647": {
+    "cardId": "asdzx23",
+    "expirationTime": 1508683366363,
+    "status": "CREATED",
+    "permissions": {
+      "address": true,
+      "picture": true,
+      "employment_status": true
+    }
+  },
+  "721597": {
+    "cardId": "asdzx23",
+    "expirationTime": 1508683236338,
+    "status": "CREATED",
+    "permissions": {
+      "address": true,
+      "picture": true,
+      "employment_status": true
+    }
+  },
+  "724919": {
+    "cardId": "asdzx23",
+    "expirationTime": 1508683959326,
+    "status": "CREATED",
+    "permissions": {
+      "occupation": true
+    }
+  },
+  "828706": {
+    "cardId": "asdzx23",
+    "expirationTime": 1508683132885,
+    "status": "PENDING",
+    "permissions": {
+      "address": true,
+      "picture": true
+    }
+  },
+  "848794": {
+    "cardId": "asdzx23",
+    "expirationTime": 1508683841210,
+    "status": "CREATED",
+    "permissions": {
+      "address": true,
+      "picture": true,
+      "employment_status": true
+    }
+  },
+  "914971": {
+    "cardId": "asdzx23",
+    "expirationTime": 1508683192579,
+    "status": "CREATED",
+    "permissions": {
+      "address": true
+    }
+  },
+  "978900": {
+    "cardId": "asdzx23",
+    "expirationTime": 1508683870833,
+    "status": "CREATED",
+    "permissions": {
+      "picture": true,
+      "employment_status": true
+    }
+  }
+}
