@@ -8,7 +8,7 @@
  */
 module.exports = (req, res, next) => {
   /* replace with urlv */
-  res.setHeader('Access-Control-Allow-Origin', 'localhost:8080');
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
   res.setHeader('Access-Control-Allow-Headers', 'x-requested-with, authorization, content-type');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, HEAD');
 
