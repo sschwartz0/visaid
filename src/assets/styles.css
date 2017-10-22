@@ -212,3 +212,7 @@ h1 {
   font-size: 24px;
   text-align: center;
 }
+
+.list-container {
+  overflow: auto;
+}

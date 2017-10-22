@@ -28,7 +28,7 @@ export default class Permissions extends PureComponent {
     } = this.props;
 
     return (
-      <div>
+      <div className="list-container">
         {status === 'SENT' &&
           <div className="applicant-congrats">
             <h1>Congrats, it was sent!</h1>
