@@ -16,7 +16,7 @@ export default class ReceivedPermission extends PureComponent {
     if (name === "creditRating") {
       return (
         <div className="received-permission-container-fair">
-          <div className="received-permission-box">
+          <div className="received-permission-box fair">
             <div>
               <span style={{ fontSize: '20px', lineHeight: '20px', marginBottom: '10px' }}>Credit Rating</span>
             </div>
@@ -29,8 +29,8 @@ export default class ReceivedPermission extends PureComponent {
     }
     if (name === "visaStanding") {
       return (
-        <div className="received-permission-container-fair">
-          <div className="received-permission-box">
+        <div className="received-permission-container-great">
+          <div className="received-permission-box great">
             <div>
               <span style={{ fontSize: '20px', lineHeight: '20px', marginBottom: '10px' }}>Visa Standing</span>
             </div>
@@ -43,8 +43,8 @@ export default class ReceivedPermission extends PureComponent {
     }
     if (name === "income") {
       return (
-        <div className="received-permission-container-fair">
-          <div className="received-permission-box">
+        <div className="received-permission-container-great">
+          <div className="received-permission-box great">
             <div>
               <span style={{ fontSize: '20px', lineHeight: '20px', marginBottom: '10px' }}>Income Range</span>
             </div>

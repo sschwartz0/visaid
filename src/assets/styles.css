@@ -14,6 +14,8 @@ html, body {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  max-height: 100%;
+  overflow-y: scroll;
 }
 
 .login-container {
@@ -134,6 +136,34 @@ html, body {
   box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
   color: #757575 !important;
   margin-bottom: 5px;
+}
+
+.received-permission-container-fair {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(219, 208, 63, .5);
+  border-radius: 2px;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+  color: #757575 !important;
+  margin-bottom: 5px;
+}
+
+.fair {
+  background-color: rgba(219, 208, 63, .5);
+}
+
+.received-permission-container-great {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(34, 145, 60, .5);
+  border-radius: 2px;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+  color: #757575 !important;
+  margin-bottom: 5px;
+}
+
+.great {
+  background-color: rgba(34, 145, 60, .5);  
 }
 
 .received-permission-box {
