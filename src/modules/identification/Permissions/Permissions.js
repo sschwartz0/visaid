@@ -26,13 +26,23 @@ export default class Permissions extends PureComponent {
 
     return (
       <div>
-        {Object.entries(permissions).map(([key, {
+        {status === 'SENT' &&
+          <div>
+            Congrats it was sent!
+          </div>
+        }
+        {status === 'RECEIVED' &&
+          <div>
+            Congrats it was received!
+          </div>
+        }
+        {status !== 'SENT' && Object.entries(permissions).map(([key, {
           name,
           description,
           requested,
           value,
           }]) => {
-            if (status === 'SENDING' && requested)
+            if (status === 'SENDING' && requested) {
               return (
                 <Permission
                   key={key}
@@ -46,6 +56,7 @@ export default class Permissions extends PureComponent {
                   status={status}
                 />
               );
+            }
             else if (status !== 'SENDING')
               return (
                 <Permission

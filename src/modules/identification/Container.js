@@ -36,7 +36,7 @@ const mapDispatchToProps = dispatch => {
   return {
     changeStatus: status => { dispatch(changeStatus(status)); },
     formChange: change => { dispatch(formChange(change)); },
-    longPoll: () => { dispatch(longPoll()); },
+    longPoll: code => { dispatch(longPoll(code)); },
     requestPermission: permission => { dispatch(requestPermission(permission)); },
     sendCode: code => { dispatch(sendCode(code)); },
     sendVerification: () => { dispatch(sendVerification()); },
@@ -60,10 +60,6 @@ export default class Identification extends PureComponent {
     sendVerification: PropTypes.func,
   };
   
-  componentWillMount = () => {
-    this.props.longPoll()
-  }
-  
   componentWillReceiveProps = (nextProps) => {
     const {
       status,
@@ -71,16 +67,9 @@ export default class Identification extends PureComponent {
       changeStatus,
     } = this.props;
     
-    if (requestStatus !== nextProps.requestStatus) {
-      if (status === "SENDING" && requestStatus === "COMPLETE") {
-        changeStatus('SENDER_COMPLETE');
-      }
-      if (status === "SENDING" && requestStatus === "IN PROGRESS") {
-        changeStatus('SENDER_WAITING');
-      }
-      if (status === "REQUESTING" && requestStatus === "COMPLETE") {
-        changeStatus('REQUESTOR_COMPLETE');
-      }
+    if (this.props.code !== nextProps.code && status === "REQUESTING") {
+      console.log(this.props.code, nextProps.code)
+      this.props.longPoll(nextProps.code)
     }
   }
 
@@ -119,6 +108,7 @@ export default class Identification extends PureComponent {
   
   onSendVerification = () => {
     this.props.sendVerification();
+    this.props.changeStatus('SENT')
   };
 
   render() {
