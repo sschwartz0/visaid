@@ -10,7 +10,7 @@ export default class Permissions extends PureComponent {
   };
   
   static defaultProps = {
-    enabled: true
+    enabled: true,
   };
 
   render() {
@@ -18,6 +18,7 @@ export default class Permissions extends PureComponent {
       enabled,
       permissions,
       onRequestPermission,
+      status,
     } = this.props;
 
     return (
@@ -28,18 +29,34 @@ export default class Permissions extends PureComponent {
           requested,
           value,
           }]) => {
-          return (
-            <Permission
-              key={key}
-              permissionKey={key}
-              enabled={enabled}
-              name={name}
-              description={description}
-              requested={requested}
-              value={value}
-              onRequestPermission={onRequestPermission}
-            />
-          );
+            if (status === 'SENDING' && requested)
+              return (
+                <Permission
+                  key={key}
+                  permissionKey={key}
+                  enabled={enabled}
+                  name={name}
+                  description={description}
+                  requested={requested}
+                  value={value}
+                  onRequestPermission={onRequestPermission}
+                  status={status}
+                />
+              );
+            else if (status !== 'SENDING')
+              return (
+                <Permission
+                  key={key}
+                  permissionKey={key}
+                  enabled={enabled}
+                  name={name}
+                  description={description}
+                  requested={requested}
+                  value={value}
+                  onRequestPermission={onRequestPermission}
+                  status={status}
+                />
+              );
         })}
       </div>
 

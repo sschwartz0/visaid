@@ -6,7 +6,7 @@ export default class SafetyCode extends PureComponent {
   static propTypes = {
     code: PropTypes.number,
     formChange: PropTypes.func,
-    isRequesting: PropTypes.bool,
+    status: PropTypes.string,
   };
 
   onFormChange = field => {
@@ -16,13 +16,15 @@ export default class SafetyCode extends PureComponent {
   render() {
     const {
       code,
-      isRequesting,
+      status,
     } = this.props;
+    
+    const isDisabled = status !== undefined && status !== 'SENDING';
 
     return (
       <InputText
         className="test"
-        disabled={isRequesting}
+        disabled={isDisabled}
         value={code || undefined}
         placeholder="Enter a code here or start requesting permissions"
         name="code"

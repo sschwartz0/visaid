@@ -1,6 +1,6 @@
 const initialState = {
   code: undefined,
-  isRequesting: false,
+  status: undefined,
   permissions: {
     address: {
       name: 'Address',
@@ -11,7 +11,7 @@ const initialState = {
     picture: {
       name: 'Picture',
       description: 'Description',
-      requested: false,
+      requested: true,
       value: undefined,
     },
     employment_status: {
@@ -50,6 +50,15 @@ const reducer = (state = initialState, action) => {
         ...state,
         code,
         isRequesting: true,
+      };
+    }
+    
+    case 'CHANGE_STATUS': {
+      const { status } = action;
+      
+      return {
+        ...state,
+        status,
       };
     }
 

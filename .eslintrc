@@ -16,6 +16,8 @@
     }
   },
   "rules": {
+    "curly": "off",
+    "jsx-a11y/label-has-for": "off",
     "no-trailing-spaces": "off",
     "no-mixed-operators":"off",
     "no-shadow":"off",

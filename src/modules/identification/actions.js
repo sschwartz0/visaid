@@ -36,10 +36,9 @@ export const generateCode = () => async dispatch => {
     });
 };
 
-export const requestPermission = ({ permissionKey, name, requested }) => (dispatch, getState) => {
-  
+export const requestPermission = ({ permissionKey, requested }) => (dispatch, getState) => {
   const codeGenerated = !!getState().identification.code;
-  console.log(codeGenerated)
+
   if (!codeGenerated) {
     const code = Math.floor(Math.random() * (999999 - 100000 + 1) + 100000);
     
@@ -53,5 +52,12 @@ export const requestPermission = ({ permissionKey, name, requested }) => (dispat
     type: 'REQUEST_PERMISSION',
     permissionKey,
     requested,
+  });
+};
+
+export const changeStatus = status => dispatch => {
+  dispatch({
+    type: 'CHANGE_STATUS',
+    status,
   });
 };

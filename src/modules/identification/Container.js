@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import SafetyCode from './SafetyCode/SafetyCode';
 import Permissions from './Permissions/Permissions';
-import { formChange, generateCode, requestPermission } from './actions';
+import { changeStatus, formChange, generateCode, requestPermission } from './actions';
 
 const mapStateToProps = state => {
   const {
@@ -11,6 +11,7 @@ const mapStateToProps = state => {
       code,
       isRequesting,
       permissions,
+      status,
     },
   } = state;
 
@@ -18,14 +19,16 @@ const mapStateToProps = state => {
     code,
     isRequesting,
     permissions,
+    status,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    formChange: (change) => { dispatch(formChange(change)); },
+    changeStatus: status => { dispatch(changeStatus(status)); },
+    formChange: change => { dispatch(formChange(change)); },
     generateCode: () => { dispatch(generateCode()); },
-    requestPermission: (permission) => { dispatch(requestPermission(permission)); },
+    requestPermission: permission => { dispatch(requestPermission(permission)); },
   };
 };
 
@@ -33,23 +36,47 @@ const mapDispatchToProps = dispatch => {
 export default class Identification extends PureComponent {
   static propTypes = {
     code: PropTypes.string,
+    changeStatus: PropTypes.func,
     generateCode: PropTypes.func,
     formChange: PropTypes.func,
     isRequesting: PropTypes.bool,
     permissions: PropTypes.object,
     requestPermission: PropTypes.func,
+    isSendingResponse: PropTypes.bool,
+    status: PropTypes.string,
   };
 
   onFormChange = field => {
-    this.props.formChange(field);
-  }
+    const {
+      code,
+      formChange,
+      changeStatus,
+      status,
+    } = this.props;
+    
+    formChange(field);
+    
+    if (code === undefined && status !== 'SENDING')
+      changeStatus('SENDING');
   
-  onRequestPermission = permission => {
-    this.props.requestPermission(permission);
-  }
+    if (code === undefined && status === 'SENDING')
+      changeStatus(undefined);
+    };
+  
+  onRequestPermission = async permission => {
+    const {
+      changeStatus,
+      generateCode,
+      requestPermission,
+      status,
+    } = this.props;
+    
+    if (status === undefined) {
+      changeStatus('REQUESTING');
+      generateCode();
+    }
 
-  generateCode = () => {
-    this.props.generateCode();
+    requestPermission(permission);
   };
   
   render() {
@@ -57,19 +84,23 @@ export default class Identification extends PureComponent {
       code,
       permissions,
       isRequesting,
+      isSendingResponse,
+      status,
     } = this.props;
 
     return (
       <div>
         <SafetyCode
           code={code}
-          formChange={formChange}
-          isRequesting={isRequesting}
+          formChange={this.onFormChange}
+          status={status}
         />
-        <button onClick={this.generateCode}> Generate code </button>
         <Permissions
+          code={code}
           permissions={permissions}
           onRequestPermission={this.onRequestPermission}
+          isSendingResponse={isSendingResponse}
+          status={status}
         />
       </div>
     );
